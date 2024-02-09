@@ -11,17 +11,6 @@ namespace FlightSimulatorControlCenter
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Recupero campi form
-            var formCodice = this.textBox1.Text;
-            var formColore = this.textBox2.Text;
-            var formNumeroDiPosti = long.Parse(this.textBox3.Text);
-
-            var a1 = AereoBl.AereoBlFactory(1, formCodice, formColore, formNumeroDiPosti);
-            aerei.Add(a1);
-        }
-
         private void Step1Init_Load(object sender, EventArgs e)
         {
             // Def data source
@@ -47,7 +36,24 @@ namespace FlightSimulatorControlCenter
 
             tabellaAerei.Columns[3].HeaderText = "Num. Posti";
             tabellaAerei.Columns[3].Name = "NumeroDiPosti";
+
+            label5.Text = "Flotta Rayanair";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Recupero campi form
+            var formCodice = this.textBox1.Text;
+            var formColore = this.textBox2.Text;
+            var formNumeroDiPosti = long.Parse(this.textBox3.Text);
+
+
+            // Salvo in locale
+            var a1 = AereoBl.AereoBlFactory(1, formCodice, formColore, formNumeroDiPosti);
+            aerei.Add(a1);
+
+            // Qui faro la mia chiamata in remoto
+        }       
 
         private void button2_Click(object sender, EventArgs e)
         {
