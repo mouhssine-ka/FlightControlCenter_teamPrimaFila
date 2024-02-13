@@ -18,7 +18,7 @@ namespace FlightSimulatorControlCenter
             // Sono singleton
             IValidationUserInputService validationService = new ValidationUserInputService();
 
-            Application.Run(new Step1Init(validationService));
+            Application.Run(new MainWindow(validationService));
         }
     }
 }

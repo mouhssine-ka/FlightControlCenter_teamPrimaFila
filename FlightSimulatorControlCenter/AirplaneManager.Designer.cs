@@ -1,6 +1,6 @@
 ﻿namespace FlightSimulatorControlCenter
 {
-    partial class Step1Init
+    partial class AirplaneManager
     {
         /// <summary>
         ///  Required designer variable.
@@ -140,7 +140,7 @@
             label5.TabIndex = 10;
             label5.Text = "Nome flotta";
             // 
-            // Step1Init
+            // AirplaneManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -156,8 +156,8 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(tabellaAerei);
-            Name = "Step1Init";
-            Text = "Form1";
+            Name = "AirplaneManager";
+            Text = "Airplane Manager";
             Load += Step1Init_Load;
             ((System.ComponentModel.ISupportInitialize)tabellaAerei).EndInit();
             ResumeLayout(false);

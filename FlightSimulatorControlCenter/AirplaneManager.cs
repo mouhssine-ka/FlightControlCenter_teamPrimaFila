@@ -6,15 +6,21 @@ using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
-    public partial class Step1Init : Form
+    public partial class AirplaneManager : Form
     {
         private IValidationUserInputService _validationService;
         private BindingList<AereoBl> aerei;
 
-        public Step1Init(IValidationUserInputService validationService)
+        private string NomeFlotta = string.Empty;
+        private long IdFlotta = 0;
+
+        public AirplaneManager(IValidationUserInputService validationService, string nomeFlotta, long idFlotta)
         {
             InitializeComponent();
             _validationService = validationService;
+
+            NomeFlotta = nomeFlotta;
+            IdFlotta = idFlotta;
         }
 
         private void Step1Init_Load(object sender, EventArgs e)
@@ -43,7 +49,7 @@ namespace FlightSimulatorControlCenter
             tabellaAerei.Columns[3].HeaderText = "Num. Posti";
             tabellaAerei.Columns[3].Name = "NumeroDiPosti";
 
-            label5.Text = "Flotta Rayanair";
+            label5.Text = NomeFlotta;
         }
 
         private void creaAereo_Click(object sender, EventArgs e)
@@ -83,10 +89,10 @@ namespace FlightSimulatorControlCenter
         private void button2_Click(object sender, EventArgs e)
         {
             // Chiamata di aggiornamento della lista di aerei nella tabella
-            SelezionaFlotta flottaForm = new SelezionaFlotta();
-            this.Hide();
-            flottaForm.ShowDialog();
-            this.Close();
+            //MainWindow flottaForm = new MainWindow();
+            //this.Hide();
+            //flottaForm.ShowDialog();
+            //this.Close();
 
 
             //flottaForm.TopLevel = false;
