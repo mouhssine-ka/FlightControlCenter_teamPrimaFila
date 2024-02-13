@@ -1,15 +1,20 @@
+using FlightSimulatorControlCenter.Model.Aereo;
+using FlightSimulatorControlCenter.Service.Int;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
     public partial class Step1Init : Form
     {
+        private IValidationUserInputService _validationService;
         private BindingList<AereoBl> aerei;
 
-        public Step1Init()
+        public Step1Init(IValidationUserInputService validationService)
         {
             InitializeComponent();
+            _validationService = validationService;
         }
 
         private void Step1Init_Load(object sender, EventArgs e)
@@ -41,20 +46,39 @@ namespace FlightSimulatorControlCenter
             label5.Text = "Flotta Rayanair";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void creaAereo_Click(object sender, EventArgs e)
         {
             // Recupero campi form
             var formCodice = this.textBox1.Text;
             var formColore = this.textBox2.Text;
-            var formNumeroDiPosti = long.Parse(this.textBox3.Text);
+            var formNumeroDiPosti = this.textBox3.Text;
 
+            // Valido l'input
+            var esistoValidazione = _validationService.ValidateUserInputForAirplaneCreation(formCodice, formColore, formNumeroDiPosti);
 
-            // Salvo in locale
-            var a1 = AereoBl.AereoBlFactory(1, formCodice, formColore, formNumeroDiPosti);
-            aerei.Add(a1);
+            if (esistoValidazione.IsValid())
+            {
+                // X Ragazzi, perchè non mi faccio ritornare direttamente il modello dell'aereo dall'esito validazione
+                // Salvo in locale
+                var a1 = AereoBl.AereoBlCreateFactory(esistoValidazione.Codice, esistoValidazione.Colore, esistoValidazione.NumeroDiPosti);
+                aerei.Add(a1);
 
-            // Qui faro la mia chiamata in remoto
-        }       
+                // Qui faro la mia chiamata in remoto
+            }
+            else {
+                var messaggeToshow = new StringBuilder();
+                messaggeToshow.Append("Prima di procedere correggere i seguenti errori:\n\r");
+
+                foreach (var message in esistoValidazione.ValidationErrors)
+                {
+                    messaggeToshow.Append(message + "\n\r");
+                }
+
+                messaggeToshow.Append("Grazie!\n\r");
+
+                MessageBox.Show(messaggeToshow.ToString());
+            }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -68,33 +92,6 @@ namespace FlightSimulatorControlCenter
             //flottaForm.TopLevel = false;
             //this.Controls.Add(flottaForm);
             //flottaForm.Show();
-        }
-    }
-
-    // Classe di appoggio da spostare
-    public class AereoBl
-    {
-
-        public long IdAereo { get; set; }
-        public string Codice { get; set; }
-        public string Colore { get; set; }
-        public long NumeroDiPosti { get; set; }
-
-        public AereoBl()
-        {
-        }
-
-        protected AereoBl(long idAereo, string codice, string colore, long numeroDiPosti)
-        {
-            this.IdAereo = idAereo;
-            this.Codice = codice;
-            this.Colore = colore;
-            this.NumeroDiPosti = numeroDiPosti;
-        }
-
-        public static AereoBl AereoBlFactory(long idAereo, string codice, string colore, long numeroDiPosti)
-        {
-            return new AereoBl(idAereo, codice, colore, numeroDiPosti);
         }
     }
 }

@@ -1,3 +1,6 @@
+using FlightSimulatorControlCenter.Service;
+using FlightSimulatorControlCenter.Service.Int;
+
 namespace FlightSimulatorControlCenter
 {
     internal static class Program
@@ -11,7 +14,11 @@ namespace FlightSimulatorControlCenter
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Step1Init());
+
+            // Sono singleton
+            IValidationUserInputService validationService = new ValidationUserInputService();
+
+            Application.Run(new Step1Init(validationService));
         }
     }
 }
