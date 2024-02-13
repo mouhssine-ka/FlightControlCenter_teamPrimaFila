@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
@@ -58,6 +59,15 @@ namespace FlightSimulatorControlCenter
         private void button2_Click(object sender, EventArgs e)
         {
             // Chiamata di aggiornamento della lista di aerei nella tabella
+            SelezionaFlotta flottaForm = new SelezionaFlotta();
+            this.Hide();
+            flottaForm.ShowDialog();
+            this.Close();
+
+
+            //flottaForm.TopLevel = false;
+            //this.Controls.Add(flottaForm);
+            //flottaForm.Show();
         }
     }
 
