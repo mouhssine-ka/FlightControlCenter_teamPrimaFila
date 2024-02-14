@@ -31,6 +31,7 @@
             tabellaFlotte = new DataGridView();
             button1 = new Button();
             button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)tabellaFlotte).BeginInit();
             SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(654, 41);
+            button1.Location = new Point(654, 12);
             button1.Name = "button1";
             button1.Size = new Size(134, 43);
             button1.TabIndex = 1;
@@ -55,7 +56,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(654, 107);
+            button2.Location = new Point(654, 61);
             button2.Name = "button2";
             button2.Size = new Size(134, 42);
             button2.TabIndex = 2;
@@ -63,11 +64,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(654, 109);
+            button3.Name = "button3";
+            button3.Size = new Size(132, 42);
+            button3.TabIndex = 3;
+            button3.Text = "Aggiorna";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // FleetManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(tabellaFlotte);
@@ -82,5 +94,6 @@
         private DataGridView tabellaFlotte;
         private Button button1;
         private Button button2;
+        private Button button3;
     }
 }

@@ -20,9 +20,9 @@ namespace FlightSimulatorControlCenter
 
             // Inizializzo il modello di db
             List<AereoBl> aerei = new List<AereoBl>() {
-            AereoBl.AereoBlCreateFactory("AereoCod1", "Rosso", 10),
-            AereoBl.AereoBlCreateFactory("AereoCod2", "Blu", 20),
-            AereoBl.AereoBlCreateFactory("AereoCod3", "Verde", 10)
+            AereoBl.AereoBlFactory(1, "AereoCod1", "Rosso", 10),
+            AereoBl.AereoBlFactory(2,"AereoCod2", "Blu", 20),
+            AereoBl.AereoBlFactory(3,"AereoCod3", "Verde", 10)
             };
 
             var flotta1 = FlottaBl.FlottaBlFactory(1, "WizzAir", "Attiva", aerei);
@@ -30,9 +30,9 @@ namespace FlightSimulatorControlCenter
             FakeDB.AggiungiFlotta(flotta1);
 
             List<AereoBl> aerei2 = new List<AereoBl>() {
-            AereoBl.AereoBlCreateFactory("AereoCod4", "Rosso", 40),
-            AereoBl.AereoBlCreateFactory("AereoCod5", "Blu", 50),
-            AereoBl.AereoBlCreateFactory("AereoCod6", "Verde", 60)
+            AereoBl.AereoBlFactory(4,"AereoCod4", "Rosso", 40),
+            AereoBl.AereoBlFactory(5,"AereoCod5", "Blu", 50),
+            AereoBl.AereoBlFactory(6,"AereoCod6", "Verde", 60)
             };
 
             var flotta2 = FlottaBl.FlottaBlFactory(2, "Rayanair", "Attiva", aerei2);

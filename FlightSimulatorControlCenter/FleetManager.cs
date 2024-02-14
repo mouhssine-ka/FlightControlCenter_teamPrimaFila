@@ -17,16 +17,7 @@ namespace FlightSimulatorControlCenter
             InitializeComponent();
             _validationService = validationService;
 
-            flotte = ConvertFlotteDBToTableModel();
-
-            var source = new BindingSource(flotte, null);
-
-            // Binding data source
-            tabellaFlotte.DataSource = source;
-
-            // Fit colonne a size tabella
-            tabellaFlotte.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            tabellaFlotte.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            InitalizeAereiDataGridFromDBModel();
 
             // Cambio label tabella
             //tabellaAerei.Columns[0].HeaderText = "Id Aereo";
@@ -40,7 +31,7 @@ namespace FlightSimulatorControlCenter
 
             //tabellaAerei.Columns[3].HeaderText = "Num. Posti";
             //tabellaAerei.Columns[3].Name = "NumeroDiPosti";
-        }       
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -55,18 +46,29 @@ namespace FlightSimulatorControlCenter
             FormPrincipale.AggiornaFlottaSelezionataLabel();
         }
 
-        private BindingList<FlottaTableModel> ConvertFlotteDBToTableModel()
+        private void button3_Click(object sender, EventArgs e)
         {
-            var result = new BindingList<FlottaTableModel>();
+            InitalizeAereiDataGridFromDBModel();
+        }
+
+        private void InitalizeAereiDataGridFromDBModel() {
+            flotte = new BindingList<FlottaTableModel>();
 
             foreach (var f in FakeDB.Flotte)
             {
                 var temp = FlottaTableModel.FlottaTableModelFactory(f.IdFlotta, f.Nome, f.Aerei.Count, "Attiva");
-                result.Add(temp);
+                flotte.Add(temp);
             }
 
-            return result;
-        }
+            var source = new BindingSource(flotte, null);
 
+            // Binding data source
+            tabellaFlotte.DataSource = source;
+
+            // Fit colonne a size tabella
+            tabellaFlotte.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            tabellaFlotte.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+        }
     }
 }
