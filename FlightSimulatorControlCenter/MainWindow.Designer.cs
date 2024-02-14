@@ -55,8 +55,9 @@
             // fleetManagerToolStripMenuItem
             // 
             fleetManagerToolStripMenuItem.Name = "fleetManagerToolStripMenuItem";
-            fleetManagerToolStripMenuItem.Size = new Size(149, 22);
+            fleetManagerToolStripMenuItem.Size = new Size(180, 22);
             fleetManagerToolStripMenuItem.Text = "Fleet Manager";
+            fleetManagerToolStripMenuItem.Click += fleetManagerToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
