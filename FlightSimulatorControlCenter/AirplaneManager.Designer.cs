@@ -1,6 +1,6 @@
 ﻿namespace FlightSimulatorControlCenter
 {
-    partial class Step1Init
+    partial class AirplaneManager
     {
         /// <summary>
         ///  Required designer variable.
@@ -35,7 +35,7 @@
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
-            button1 = new Button();
+            creaAereo = new Button();
             button2 = new Button();
             label4 = new Label();
             label5 = new Label();
@@ -102,15 +102,15 @@
             textBox3.Size = new Size(158, 23);
             textBox3.TabIndex = 6;
             // 
-            // button1
+            // creaAereo
             // 
-            button1.Location = new Point(531, 123);
-            button1.Name = "button1";
-            button1.Size = new Size(257, 23);
-            button1.TabIndex = 7;
-            button1.Text = "Aggiungi Aereo";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            creaAereo.Location = new Point(531, 123);
+            creaAereo.Name = "creaAereo";
+            creaAereo.Size = new Size(257, 23);
+            creaAereo.TabIndex = 7;
+            creaAereo.Text = "Aggiungi Aereo";
+            creaAereo.UseVisualStyleBackColor = true;
+            creaAereo.Click += creaAereo_Click;
             // 
             // button2
             // 
@@ -140,7 +140,7 @@
             label5.TabIndex = 10;
             label5.Text = "Nome flotta";
             // 
-            // Step1Init
+            // AirplaneManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -148,7 +148,7 @@
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(creaAereo);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -156,8 +156,8 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(tabellaAerei);
-            Name = "Step1Init";
-            Text = "Form1";
+            Name = "AirplaneManager";
+            Text = "Airplane Manager";
             Load += Step1Init_Load;
             ((System.ComponentModel.ISupportInitialize)tabellaAerei).EndInit();
             ResumeLayout(false);
@@ -173,7 +173,7 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
-        private Button button1;
+        private Button creaAereo;
         private Button button2;
         private Label label4;
         private Label label5;
