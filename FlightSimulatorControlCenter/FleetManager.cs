@@ -1,4 +1,5 @@
 ﻿using FlightSimulatorControlCenter.Model.DB;
+using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Model.Flotta;
 using FlightSimulatorControlCenter.Service.Int;
 using System.ComponentModel;
@@ -7,6 +8,11 @@ namespace FlightSimulatorControlCenter
 {
     public partial class FleetManager : Form
     {
+        // Eventi esposti dalla Form
+        public event FleetSelectedEvent FleetSelected;
+        public event FleetUpdatedEvent FleetUpdated;
+        public event FleetCreatedEvent FleetCreated;
+
         private IValidationUserInputService _validationService;
         private BindingList<FlottaTableModel> flotte = new BindingList<FlottaTableModel>();
 
@@ -18,19 +24,6 @@ namespace FlightSimulatorControlCenter
             _validationService = validationService;
 
             InitalizeAereiDataGridFromDBModel();
-
-            // Cambio label tabella
-            //tabellaAerei.Columns[0].HeaderText = "Id Aereo";
-            //tabellaAerei.Columns[0].Name = "IdAereo";
-
-            //tabellaAerei.Columns[1].HeaderText = "Cod Aereo";
-            //tabellaAerei.Columns[1].Name = "Codice";
-
-            //tabellaAerei.Columns[2].HeaderText = "Colore";
-            //tabellaAerei.Columns[2].Name = "Colore";
-
-            //tabellaAerei.Columns[3].HeaderText = "Num. Posti";
-            //tabellaAerei.Columns[3].Name = "NumeroDiPosti";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -42,8 +35,12 @@ namespace FlightSimulatorControlCenter
             var flottaBlSelezionata = FakeDB.GetFlottaSelezionataById(flottaTableSelezionata.Id);
             FakeDB.ImpostaFlottaSelezionata(flottaBlSelezionata);
 
-            // Chiedo alla form main di aggiornare la label della flotta selezionata
-            FormPrincipale.AggiornaFlottaSelezionataLabel();
+            // Mando l'evento
+            this.FleetSelected(flottaBlSelezionata);
+        }
+
+        public void RequestUpdateData() {
+            InitalizeAereiDataGridFromDBModel();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -68,7 +65,6 @@ namespace FlightSimulatorControlCenter
             // Fit colonne a size tabella
             tabellaFlotte.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             tabellaFlotte.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-
         }
     }
 }

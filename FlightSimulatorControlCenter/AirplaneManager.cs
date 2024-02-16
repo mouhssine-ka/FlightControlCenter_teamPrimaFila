@@ -1,16 +1,20 @@
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.DB;
-using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Service.Int;
 using System.ComponentModel;
 using System.Text;
-using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
     public partial class AirplaneManager : Form
     {
-        private IValidationUserInputService _validationService;
+        // Eventi esposti dalla Form
+        public event AirplaneCreatedEvent AirPlaneCreated;
+        public event AirplaneUpdatedEvent AirPlaneUpdated;
+        public event AirplaneDeletedEvent AirPlaneDeleted;
+
+        private IValidationUserInputService _validationService;       
 
         public AirplaneManager(IValidationUserInputService validationService)
         {
@@ -22,9 +26,8 @@ namespace FlightSimulatorControlCenter
         {
             // Def data source
             InitalizeAereiDataGridFromDBModel();
-            
-            label5.Text = FakeDB.FlottaSelezionata.Nome;
-        }     
+            UpdateLabelOfSelectedFleet();           
+        }       
 
         private void creaAereo_Click(object sender, EventArgs e)
         {
@@ -42,7 +45,10 @@ namespace FlightSimulatorControlCenter
                 // Salvo in locale
                 var a1 = AereoBl.AereoBlCreateFactory(esistoValidazione.Codice, esistoValidazione.Colore, esistoValidazione.NumeroDiPosti);
                 FakeDB.FlottaSelezionata.Aerei.Add(a1);
-                
+
+                // Mando l'evento
+                this.AirPlaneCreated(a1);
+
                 InitalizeAereiDataGridFromDBModel();
 
                 // Qui faro la mia chiamata in remoto
@@ -62,18 +68,14 @@ namespace FlightSimulatorControlCenter
             }
         }
 
+        public void RequestUpdateData() {
+            InitalizeAereiDataGridFromDBModel();
+            UpdateLabelOfSelectedFleet();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            // Chiamata di aggiornamento della lista di aerei nella tabella
-            //MainWindow flottaForm = new MainWindow();
-            //this.Hide();
-            //flottaForm.ShowDialog();
-            //this.Close();
-
-
-            //flottaForm.TopLevel = false;
-            //this.Controls.Add(flottaForm);
-            //flottaForm.Show();
+          
         }
 
         private void InitalizeAereiDataGridFromDBModel()
@@ -106,6 +108,11 @@ namespace FlightSimulatorControlCenter
 
             tabellaAerei.Columns[3].HeaderText = "Num. Posti";
             tabellaAerei.Columns[3].Name = "NumeroDiPosti";
+        }
+
+        private void UpdateLabelOfSelectedFleet()
+        {
+            label5.Text = FakeDB.FlottaSelezionata.Nome;
         }
     }
 }
