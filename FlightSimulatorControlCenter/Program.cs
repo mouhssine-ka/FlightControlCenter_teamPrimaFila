@@ -43,7 +43,7 @@ namespace FlightSimulatorControlCenter
             // Da modificare
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5093/");
-            ImpiantiClient clientImpianto = new(client);
+            FlightSimulatorClient clientImpianto = new(client);
             var t = clientImpianto.AereoGETAsync(1);
             t.Wait();
 
