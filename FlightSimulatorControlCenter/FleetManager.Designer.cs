@@ -32,6 +32,8 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            textBox1 = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)tabellaFlotte).BeginInit();
             SuspendLayout();
             // 
@@ -47,12 +49,13 @@
             // 
             // button1
             // 
-            button1.Location = new Point(654, 12);
+            button1.Location = new Point(12, 60);
             button1.Name = "button1";
-            button1.Size = new Size(134, 43);
+            button1.Size = new Size(186, 43);
             button1.TabIndex = 1;
-            button1.Text = "Aggiungi";
+            button1.Text = "Aggiungi flotta";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -74,11 +77,29 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(56, 18);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(142, 23);
+            textBox1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 26);
+            label1.Name = "label1";
+            label1.Size = new Size(40, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Nome";
+            // 
             // FleetManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -87,6 +108,7 @@
             Text = "FleetManager";
             ((System.ComponentModel.ISupportInitialize)tabellaFlotte).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -95,5 +117,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private TextBox textBox1;
+        private Label label1;
     }
 }
