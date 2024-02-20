@@ -33,21 +33,38 @@ namespace FlightSimulatorControlCenter
             _externalService = externalService;
             _conversionService = conversionService;
 
-            _elencoFlotte = RetrieveFleetData();
-            InitalizeAereiDataGridFromDBModel();
+            RetrieveAndUpdateFleetData();
         }
 
-        // Recupero l'elenco delle flotte dal server
-        private List<FlottaBl> RetrieveFleetData()
+        private void button1_Click(object sender, EventArgs e)
         {
-            // Recupero la flotta
-            var result =  _externalService.GetElencoFlotteAsync();
+            // Apro la form di creazione
+            if (!FormUtils.FormIsOpen("AggiungiFlotta"))
+            {
+                formCreazioneFlotta = new AggiungiFlotta(_validationService);
+                formCreazioneFlotta.FleetCreateReq += (string nomeFlotta) => {
+                    // Creo la request
+                    var req = new CreateFlottaRequest();
+                    req.Nome = nomeFlotta;
 
-            // Converto la risposta nei modelli Bl
-            var flotteBl = _conversionService.ConvertToBl(result);
+                    // Eseguo la chiamata
+                    var flottaApi = _externalService.FlottaPOSTAsync(req);
 
-            return flotteBl;
-        }
+                    // converto il modello 
+                    var flottaBlCreata = _conversionService.ConvertToBl(flottaApi);
+
+                    // Mando l'evento
+                    this.FleetSelected(flottaBlCreata);
+
+                    // Chiudo la form
+                    formCreazioneFlotta.Close();
+
+                    // Richiedo l'aggiornamento della tabella
+                    RetrieveAndUpdateFleetData();
+                };
+                formCreazioneFlotta.Show();
+            }
+        }       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -62,14 +79,27 @@ namespace FlightSimulatorControlCenter
             this.FleetSelected(flottaBlSelezionata);
         }
 
-        public void RequestUpdateData()
-        {
-            InitalizeAereiDataGridFromDBModel();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
-            InitalizeAereiDataGridFromDBModel();
+            RetrieveAndUpdateFleetData();
+        }
+
+        // Chiamata da altra form per refresh dati
+        public void RequestUpdateData()
+        {
+            RetrieveAndUpdateFleetData();
+        }
+
+        // Recupero l'elenco delle flotte dal server
+        private List<FlottaBl> RetrieveFleetData()
+        {
+            // Recupero la flotta
+            var result = _externalService.GetElencoFlotteAsync();
+
+            // Converto la risposta nei modelli Bl
+            var flotteBl = _conversionService.ConvertToBl(result);
+
+            return flotteBl;
         }
 
         private void InitalizeAereiDataGridFromDBModel()
@@ -95,36 +125,6 @@ namespace FlightSimulatorControlCenter
         private void RetrieveAndUpdateFleetData() {
             _elencoFlotte = RetrieveFleetData();
             InitalizeAereiDataGridFromDBModel();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Apro la form di creazione
-            if (!FormUtils.FormIsOpen("AggiungiFlotta"))
-            {
-                formCreazioneFlotta = new AggiungiFlotta(_validationService);
-                formCreazioneFlotta.FleetCreateReq += (string nomeFlotta) =>  {
-                    // Creo la request
-                    var req = new CreateFlottaRequest();
-                    req.Nome = nomeFlotta;
-
-                    // Eseguo la chiamata
-                    var flottaApi = _externalService.FlottaPOSTAsync(req);
-
-                    // converto il modello 
-                    var flottaBlCreata = _conversionService.ConvertToBl(flottaApi);
-
-                    // Mando l'evento
-                    this.FleetSelected(flottaBlCreata);
-
-                    // Chiudo la form
-                    formCreazioneFlotta.Close();
-
-                    // Richiedo l'aggiornamento della tabella
-                    RetrieveAndUpdateFleetData();
-                };
-                formCreazioneFlotta.Show();
-            }      
         }
     }
 }
