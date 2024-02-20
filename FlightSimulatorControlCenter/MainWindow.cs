@@ -16,6 +16,8 @@ namespace FlightSimulatorControlCenter
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
 
+        long idFlottaSelezionata = -1;
+
         public MainWindow(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace FlightSimulatorControlCenter
         {
             if (!FormUtils.FormIsOpen("AirplaneManager"))
             {
-                airplaneManagerForm = new AirplaneManager(_validationService, _externalService, _conversionService);
+                airplaneManagerForm = new AirplaneManager(idFlottaSelezionata, _validationService, _externalService, _conversionService);
                 airplaneManagerForm.MdiParent = this;
                 HandleAirplaneManagerEvent(airplaneManagerForm);              
 
@@ -93,8 +95,10 @@ namespace FlightSimulatorControlCenter
             {
                 // Ricevo la notifica che una flotta è stata selezionata
                 // Chiedo alla form di gestione Aerei di aggiornare gli aerei
-                airplaneManagerForm?.UpdateSelectedFleet(flotta);
+                idFlottaSelezionata = flotta.IdFlotta;
                 UpdateLabelOfSelectedFleet(flotta.Nome);
+
+                airplaneManagerForm?.UpdateSelectedFleet(flotta);                
             };
         }
 

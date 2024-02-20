@@ -27,12 +27,14 @@ namespace FlightSimulatorControlCenter
 
         private CreazioneAereo creazioneAereoForm;
 
-        public AirplaneManager(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
+        public AirplaneManager(long idFLottaAttiva, IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
             InitializeComponent();
             _validationService = validationService;
             _externalService = externalService;
             _conversionService = conversionService;
+
+            idFlottaAttiva = idFLottaAttiva;
         }
 
         private void Step1Init_Load(object sender, EventArgs e)
