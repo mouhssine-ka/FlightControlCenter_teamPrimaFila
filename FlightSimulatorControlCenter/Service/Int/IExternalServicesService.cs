@@ -9,7 +9,9 @@ namespace FlightSimulatorControlCenter.Service.Int
 {
     public interface IExternalServicesService
     {
+        AereoApi AereoPOSTAsync(CreateAereoRequest req);
         FlottaApi FlottaPOSTAsync(CreateFlottaRequest req);
         List<FlottaApi> GetElencoFlotteAsync();
+        FlottaApi GetFlottaAsync(long idFlottaAttiva);
     }
 }

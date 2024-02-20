@@ -45,5 +45,29 @@ namespace FlightSimulatorControlCenter.Service
             var elencoFlotte = (_clientFlightSimulator.GetElencoFlotteAsync()).Result;
             return elencoFlotte.ToList();
         }
+
+        public FlottaApi GetFlottaAsync(long idFLotta)
+        {
+            List<AereoApi> aerei = new List<AereoApi>() {
+            new AereoApi() { IdAereo = 1, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 },
+            new AereoApi() { IdAereo = 2, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 },
+            new AereoApi() { IdAereo = 3, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 },
+            };
+
+            var flotta1 = new FlottaApi() { IdFlotta = 1, Nome = "WizzAir", Aerei = aerei };
+            return flotta1;
+
+            var flotta = (_clientFlightSimulator.FlottaGETAsync(idFLotta)).Result;
+            return flotta;
+        }
+
+        public AereoApi AereoPOSTAsync(CreateAereoRequest req)
+        {
+            var aereo1 = new AereoApi() { IdAereo = 1, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 };
+            return aereo1;
+
+            var aereoCreatoApi = (_clientFlightSimulator.AereoPOSTAsync(req)).Result;
+            return aereoCreatoApi;
+        }
     }
 }
