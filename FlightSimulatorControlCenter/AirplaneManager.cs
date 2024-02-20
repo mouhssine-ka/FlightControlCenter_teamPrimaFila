@@ -14,12 +14,15 @@ namespace FlightSimulatorControlCenter
         public event AirplaneUpdatedEvent AirPlaneUpdated;
         public event AirplaneDeletedEvent AirPlaneDeleted;
 
-        private IValidationUserInputService _validationService;       
+        private IValidationUserInputService _validationService;    
+        private IExternalServicesService _externalService;
 
-        public AirplaneManager(IValidationUserInputService validationService)
+
+        public AirplaneManager(IValidationUserInputService validationService, IExternalServicesService externalService)
         {
             InitializeComponent();
             _validationService = validationService;
+            _externalService = externalService;
         }
 
         private void Step1Init_Load(object sender, EventArgs e)

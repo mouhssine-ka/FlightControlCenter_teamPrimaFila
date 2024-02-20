@@ -8,16 +8,20 @@ namespace FlightSimulatorControlCenter
     public partial class MainWindow : Form
     {
         private IValidationUserInputService _validationService;
+        private IExternalServicesService _externalService;
+        private IConversionModelService _conversionService;
         private ToolStripLabel LabelFlottaSelezionata;
 
         // Aggiungo la ref alle due form
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
 
-        public MainWindow(IValidationUserInputService validationService)
+        public MainWindow(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
             InitializeComponent();
             _validationService = validationService;
+            _externalService = externalService;
+            _conversionService = conversionService;
 
             // Inizializzo la label della flotta inizializzata
             UpdateLabelOfSelectedFleet("Flotta non selezionata");
@@ -27,7 +31,7 @@ namespace FlightSimulatorControlCenter
         {
             if (!FormUtils.FormIsOpen("AirplaneManager"))
             {
-                airplaneManagerForm = new AirplaneManager(_validationService);
+                airplaneManagerForm = new AirplaneManager(_validationService, _externalService);
                 airplaneManagerForm.MdiParent = this;
                 HandleAirplaneManagerEvent(airplaneManagerForm);              
 
@@ -63,7 +67,7 @@ namespace FlightSimulatorControlCenter
         {
             if (!FormUtils.FormIsOpen("FleetManager"))
             {
-                fleetManagerForm = new FleetManager(_validationService);
+                fleetManagerForm = new FleetManager(_validationService, _externalService, _conversionService);
                 fleetManagerForm.MdiParent = this;
                 fleetManagerForm.FormPrincipale = this;
                 HandleFleetManagerEvent(fleetManagerForm);

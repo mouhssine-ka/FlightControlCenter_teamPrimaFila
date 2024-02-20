@@ -5,4 +5,7 @@ namespace FlightSimulatorControlCenter.Model.Event
     public delegate void FleetSelectedEvent(FlottaBl fleetSelected);
     public delegate void FleetCreatedEvent(FlottaBl fleetCreated);
     public delegate void FleetUpdatedEvent(FlottaBl fleetUpdated);
+
+
+    public delegate void FleetExecuteCreateEvent(string nomeFlotta);
 }

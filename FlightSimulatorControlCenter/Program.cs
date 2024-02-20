@@ -40,19 +40,12 @@ namespace FlightSimulatorControlCenter
 
             FakeDB.AggiungiFlotta(flotta2);
 
-            // Da modificare
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5093/");
-            Client clientImpianto = new(client);
-            var t = clientImpianto.AereoGETAsync(1);
-            t.Wait();
-
-            var a = t.Result;
-
             // Sono singleton
             IValidationUserInputService validationService = new ValidationUserInputService();
+            IExternalServicesService externalService = new ExternalServicesService("http://localhost:5093/");
+            IConversionModelService conversionService = new ConversionModelService();
 
-            Application.Run(new MainWindow(validationService));
+            Application.Run(new MainWindow(validationService, externalService, conversionService));
         }
     }
 }
