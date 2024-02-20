@@ -1,3 +1,4 @@
+using Clients.ImpiantiClient;
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.DB;
 using FlightSimulatorControlCenter.Model.Flotta;
@@ -38,6 +39,15 @@ namespace FlightSimulatorControlCenter
             var flotta2 = FlottaBl.FlottaBlFactory(2, "Rayanair", "Attiva", aerei2);
 
             FakeDB.AggiungiFlotta(flotta2);
+
+            // Da modificare
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:5093/");
+            Client clientImpianto = new(client);
+            var t = clientImpianto.AereoGETAsync(1);
+            t.Wait();
+
+            var a = t.Result;
 
             // Sono singleton
             IValidationUserInputService validationService = new ValidationUserInputService();
