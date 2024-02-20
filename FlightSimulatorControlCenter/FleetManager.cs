@@ -36,7 +36,7 @@ namespace FlightSimulatorControlCenter
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5093/");
-            FlightSimulatorClient clientImpianto = new(client);
+            Client clientImpianto = new(client);
             var t = clientImpianto.GetElencoFlotteAsync();
             t.Wait();
 
@@ -99,8 +99,10 @@ namespace FlightSimulatorControlCenter
 
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5093/");
-            FlightSimulatorClient clientImpianto = new(client);
-            var t = clientImpianto.FlottaPOSTAsync(nomeFlotta, new CreateFlottaRequest());
+            Client clientImpianto = new(client);
+            var req = new CreateFlottaRequest();
+            req.Nome = nomeFlotta;
+            var t = clientImpianto.FlottaPOSTAsync(req);
             t.Wait();
 
             var flottaCreataApi = t.Result;
