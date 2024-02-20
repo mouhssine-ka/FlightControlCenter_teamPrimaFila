@@ -17,7 +17,7 @@ namespace FlightSimulatorControlCenter
         public event AirplaneUpdatedEvent AirPlaneUpdated;
         public event AirplaneDeletedEvent AirPlaneDeleted;
 
-        private IValidationUserInputService _validationService;    
+        private IValidationUserInputService _validationService;
         private IExternalServicesService _externalService;
         private IConversionModelService _conversionService;
 
@@ -26,6 +26,7 @@ namespace FlightSimulatorControlCenter
         private FlottaBl flottaAttiva;
 
         private CreazioneAereo creazioneAereoForm;
+        private ModificaAereo modificaAereoForm;
 
         public AirplaneManager(long idFLottaAttiva, IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -38,10 +39,10 @@ namespace FlightSimulatorControlCenter
         }
 
         private void Step1Init_Load(object sender, EventArgs e)
-        {   
+        {
             RetrieveAndUpdateFleetData();
             CheckUIElementToEnableDisable();
-        }       
+        }
 
         private void creaAereo_Click(object sender, EventArgs e)
         {
@@ -49,9 +50,10 @@ namespace FlightSimulatorControlCenter
             if (!FormUtils.FormIsOpen("CreazioneAereo"))
             {
                 creazioneAereoForm = new CreazioneAereo(_validationService);
-                creazioneAereoForm.AirplaneCreateReq += (string codice, string colore, long numPosti) => {
+                creazioneAereoForm.AirplaneCreateReq += (string codice, string colore, long numPosti) =>
+                {
                     // Creo la request
-                    var req = new CreateAereoRequest();                    
+                    var req = new CreateAereoRequest();
                     req.IdFLotta = flottaAttiva.IdFlotta;
                     req.CodiceAereo = codice;
                     req.Colore = colore;
@@ -73,7 +75,48 @@ namespace FlightSimulatorControlCenter
                     RetrieveAndUpdateFleetData();
                 };
                 creazioneAereoForm.Show();
-            }            
+            }
+        }
+
+        private void modificaAereo_Click(object sender, EventArgs e)
+        {
+            // Apro la form di creazione
+            if (!FormUtils.FormIsOpen("ModificaAereo"))
+            {
+                // Recupero l'aereo selezionato
+                int row = tabellaAerei.CurrentRow.Index;
+                var flottaTableSelezionata = flottaAttiva.Aerei[row];
+
+                // Recupero la flotta bl selezionata
+                //var flottaBlSelezionata = _elencoFlotte.Single(x => x.IdFlotta == flottaTableSelezionata.Id);
+
+                modificaAereoForm = new ModificaAereo(idFlottaAttiva, flottaTableSelezionata);
+                modificaAereoForm.AirplaneModifyReq += (long idFlotta, long idAereo, string codice, string colore, long numPosti) =>
+                {
+                    // Creo la request
+                    var req = new UpdateAereoRequest();
+                    req.IdAereo = idAereo;
+                    req.CodiceAereo = codice;
+                    req.Colore = colore;
+                    req.NumeroDiPosti = numPosti;
+
+                    // Eseguo la chiamata
+                    var aereoApi = _externalService.AereoPutAsync(req);
+
+                    // converto il modello 
+                    var aereoBlCreato = _conversionService.ConvertToBl(aereoApi);
+
+                    // Mando l'evento
+                    this.AirPlaneUpdated(aereoBlCreato);
+
+                    // Chiudo la form
+                    modificaAereoForm.Close();
+
+                    // Richiedo l'aggiornamento della tabella
+                    RetrieveAndUpdateFleetData();
+                };
+                modificaAereoForm.Show();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -81,8 +124,9 @@ namespace FlightSimulatorControlCenter
             RetrieveAndUpdateFleetData();
         }
 
-        public void RequestUpdateData() {
-            RetrieveAndUpdateFleetData();          
+        public void RequestUpdateData()
+        {
+            RetrieveAndUpdateFleetData();
         }
 
         public void UpdateSelectedFleet(FlottaBl flotta)
@@ -102,7 +146,8 @@ namespace FlightSimulatorControlCenter
                 this.modificaAereo.Enabled = true;
                 this.cancellaAereo.Enabled = true;
             }
-            else {
+            else
+            {
                 this.creaAereo.Enabled = false;
                 this.aggiornaDati.Enabled = false;
                 this.modificaAereo.Enabled = false;
@@ -121,8 +166,8 @@ namespace FlightSimulatorControlCenter
             else
             {
                 MessageBox.Show("Seleziona una flotta prima di gestire gli aerei!");
-            }           
-        }      
+            }
+        }
 
         // Recupero l'elenco delle flotte dal server
         private FlottaBl RetrieveFleetData()

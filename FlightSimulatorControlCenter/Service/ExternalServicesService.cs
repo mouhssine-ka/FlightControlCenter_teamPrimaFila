@@ -69,5 +69,14 @@ namespace FlightSimulatorControlCenter.Service
             var aereoCreatoApi = (_clientFlightSimulator.AereoPOSTAsync(req)).Result;
             return aereoCreatoApi;
         }
+
+        public AereoApi AereoPutAsync(UpdateAereoRequest req)
+        {
+            var aereo1 = new AereoApi() { IdAereo = 1, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 };
+            return aereo1;
+
+            var aereoModificatoApi = (_clientFlightSimulator.AereoPUTAsync(req)).Result;
+            return aereoModificatoApi;
+        }
     }
 }

@@ -96,6 +96,7 @@
             modificaAereo.TabIndex = 11;
             modificaAereo.Text = "Modifica Aereo";
             modificaAereo.UseVisualStyleBackColor = true;
+            modificaAereo.Click += modificaAereo_Click;
             // 
             // cancellaAereo
             // 
