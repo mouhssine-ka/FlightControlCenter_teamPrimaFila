@@ -41,9 +41,14 @@ namespace FlightSimulatorControlCenter
             FakeDB.AggiungiFlotta(flotta2);
 
             // Sono singleton
+            //IValidationUserInputService validationService = new ValidationUserInputService();
+            //IExternalServicesService externalService = new MockupExternalServicesService();
+            //IConversionModelService conversionService = new ConversionModelService();
+
             IValidationUserInputService validationService = new ValidationUserInputService();
-            IExternalServicesService externalService = new ExternalServicesService("http://localhost:5093/");
+            IExternalServicesService externalService = new DBexternalServices("http://localhost:5093");
             IConversionModelService conversionService = new ConversionModelService();
+
 
             Application.Run(new MainWindow(validationService, externalService, conversionService));
         }

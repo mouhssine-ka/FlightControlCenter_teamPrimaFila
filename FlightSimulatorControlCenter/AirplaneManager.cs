@@ -4,6 +4,7 @@ using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.DB;
 using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
 using System.ComponentModel;
 using System.Text;
@@ -216,6 +217,22 @@ namespace FlightSimulatorControlCenter
         private void UpdateLabelOfSelectedFleet()
         {
             label5.Text = flottaAttiva.Nome;
-        }       
+        }
+
+        private void cancellaAereo_Click(object sender, EventArgs e)
+        {
+            int row = tabellaAerei.CurrentRow.Index;
+            var AereoSelezionato = flottaAttiva.Aerei[row];
+
+
+            
+
+            if (!FormUtils.FormIsOpen("CancellaAereo"))
+            {
+                var FormCancellaAereo = new CancellaAereo(AereoSelezionato, _externalService);
+                FormCancellaAereo.Show();
+            }
+
+        }
     }
 }

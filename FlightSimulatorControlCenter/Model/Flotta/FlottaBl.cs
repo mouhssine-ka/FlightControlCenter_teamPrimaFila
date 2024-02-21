@@ -23,5 +23,10 @@ namespace FlightSimulatorControlCenter.Model.Flotta
         public void AddAereo(AereoBl aereobl) {
             this.Aerei.Add(aereobl);
         }
+
+        public void RemoveAereo(AereoBl aereoBl)
+        {
+            this.Aerei.Remove(aereoBl);
+        }
     }
 }

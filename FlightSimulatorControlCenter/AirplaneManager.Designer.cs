@@ -43,18 +43,21 @@
             tabellaAerei.AllowUserToAddRows = false;
             tabellaAerei.AllowUserToDeleteRows = false;
             tabellaAerei.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tabellaAerei.Location = new Point(12, 76);
+            tabellaAerei.Location = new Point(14, 101);
+            tabellaAerei.Margin = new Padding(3, 4, 3, 4);
             tabellaAerei.MultiSelect = false;
             tabellaAerei.Name = "tabellaAerei";
             tabellaAerei.ReadOnly = true;
-            tabellaAerei.Size = new Size(776, 351);
+            tabellaAerei.RowHeadersWidth = 51;
+            tabellaAerei.Size = new Size(887, 468);
             tabellaAerei.TabIndex = 0;
             // 
             // creaAereo
             // 
-            creaAereo.Location = new Point(245, 18);
+            creaAereo.Location = new Point(280, 24);
+            creaAereo.Margin = new Padding(3, 4, 3, 4);
             creaAereo.Name = "creaAereo";
-            creaAereo.Size = new Size(257, 23);
+            creaAereo.Size = new Size(294, 31);
             creaAereo.TabIndex = 7;
             creaAereo.Text = "Aggiungi Aereo";
             creaAereo.UseVisualStyleBackColor = true;
@@ -62,9 +65,10 @@
             // 
             // aggiornaDati
             // 
-            aggiornaDati.Location = new Point(531, 47);
+            aggiornaDati.Location = new Point(607, 63);
+            aggiornaDati.Margin = new Padding(3, 4, 3, 4);
             aggiornaDati.Name = "aggiornaDati";
-            aggiornaDati.Size = new Size(257, 23);
+            aggiornaDati.Size = new Size(294, 31);
             aggiornaDati.TabIndex = 8;
             aggiornaDati.Text = "Aggiorna Flotta";
             aggiornaDati.UseVisualStyleBackColor = true;
@@ -73,26 +77,27 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 18);
+            label4.Location = new Point(14, 24);
             label4.Name = "label4";
-            label4.Size = new Size(84, 15);
+            label4.Size = new Size(106, 20);
             label4.TabIndex = 9;
             label4.Text = "Flotta corrente";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 45);
+            label5.Location = new Point(14, 60);
             label5.Name = "label5";
-            label5.Size = new Size(71, 15);
+            label5.Size = new Size(90, 20);
             label5.TabIndex = 10;
             label5.Text = "Nome flotta";
             // 
             // modificaAereo
             // 
-            modificaAereo.Location = new Point(245, 47);
+            modificaAereo.Location = new Point(280, 63);
+            modificaAereo.Margin = new Padding(3, 4, 3, 4);
             modificaAereo.Name = "modificaAereo";
-            modificaAereo.Size = new Size(257, 23);
+            modificaAereo.Size = new Size(294, 31);
             modificaAereo.TabIndex = 11;
             modificaAereo.Text = "Modifica Aereo";
             modificaAereo.UseVisualStyleBackColor = true;
@@ -100,18 +105,20 @@
             // 
             // cancellaAereo
             // 
-            cancellaAereo.Location = new Point(531, 18);
+            cancellaAereo.Location = new Point(607, 24);
+            cancellaAereo.Margin = new Padding(3, 4, 3, 4);
             cancellaAereo.Name = "cancellaAereo";
-            cancellaAereo.Size = new Size(257, 23);
+            cancellaAereo.Size = new Size(294, 31);
             cancellaAereo.TabIndex = 12;
             cancellaAereo.Text = "Cancella Aereo";
             cancellaAereo.UseVisualStyleBackColor = true;
+            cancellaAereo.Click += cancellaAereo_Click;
             // 
             // AirplaneManager
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(cancellaAereo);
             Controls.Add(modificaAereo);
             Controls.Add(label5);
@@ -119,6 +126,7 @@
             Controls.Add(aggiornaDati);
             Controls.Add(creaAereo);
             Controls.Add(tabellaAerei);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AirplaneManager";
             Text = "Airplane Manager";
             Load += Step1Init_Load;
