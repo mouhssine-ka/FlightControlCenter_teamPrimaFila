@@ -42,7 +42,7 @@ namespace FlightSimulatorControlCenter
 
             // Sono singleton
             IValidationUserInputService validationService = new ValidationUserInputService();
-            IExternalServicesService externalService = new ExternalServicesService("http://localhost:5093/");
+            IExternalServicesService externalService = new ExternalServicesMockedService("http://localhost:5093/");
             IConversionModelService conversionService = new ConversionModelService();
 
             Application.Run(new MainWindow(validationService, externalService, conversionService));

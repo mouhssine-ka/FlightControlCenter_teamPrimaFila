@@ -31,6 +31,7 @@
             textBox1 = new TextBox();
             label1 = new Label();
             button1 = new Button();
+            annullaButton = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -51,7 +52,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(169, 106);
+            button1.Location = new Point(24, 105);
             button1.Name = "button1";
             button1.Size = new Size(171, 47);
             button1.TabIndex = 2;
@@ -59,11 +60,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // annullaButton
+            // 
+            annullaButton.Location = new Point(305, 105);
+            annullaButton.Name = "annullaButton";
+            annullaButton.Size = new Size(164, 47);
+            annullaButton.TabIndex = 3;
+            annullaButton.Text = "Annulla";
+            annullaButton.UseVisualStyleBackColor = true;
+            annullaButton.Click += annullaButton_Click;
+            // 
             // AggiungiFlotta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(499, 177);
+            Controls.Add(annullaButton);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(textBox1);
@@ -78,5 +90,6 @@
         private TextBox textBox1;
         private Label label1;
         private Button button1;
+        private Button annullaButton;
     }
 }

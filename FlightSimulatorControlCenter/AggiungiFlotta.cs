@@ -26,5 +26,10 @@ namespace FlightSimulatorControlCenter
             // Invio l'evento
             this.FleetCreateReq(nomeFlotta);
         }
+
+        private void annullaButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
