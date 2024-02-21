@@ -1,4 +1,6 @@
 ﻿using FlightSimulatorControlCenter.Model.Event;
+using FlightSimulatorControlCenter.Service.Int;
+using FlightSimulatorControlCenter.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,31 @@ namespace FlightSimulatorControlCenter
         public DbSelection()
         {
             InitializeComponent();
+        }
+
+        private void DbSelection_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dbEsterno_Click(object sender, EventArgs e)
+        {
+            this.SceltaSelected(1);
+        }
+
+        private void FakeDB_Click(object sender, EventArgs e)
+        {
+            this.SceltaSelected(2);
+        }
+
+        private void MockedDB_Click(object sender, EventArgs e)
+        {
+            this.SceltaSelected(3);
         }
     }
 }

@@ -248,5 +248,18 @@ namespace FlightSimulatorControlCenter
         {
             label5.Text = flottaAttiva.Nome;
         }       
+
+        public void UpdateExternalService(IExternalServicesService nuovoService)
+        {
+            if (nuovoService != null)
+            {
+                _externalService = nuovoService;
+                idFlottaAttiva = -1;
+                InitializeComponent();
+                RetrieveAndUpdateFleetData();
+                CheckUIElementToEnableDisable();
+            }
+
+        }
     }
 }
