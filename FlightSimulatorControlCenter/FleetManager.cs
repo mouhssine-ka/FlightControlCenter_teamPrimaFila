@@ -128,6 +128,7 @@ namespace FlightSimulatorControlCenter
         }
         public void UpdateExternalService(IExternalServicesService nuovoService)
         {
+            this.Close();
             _externalService = nuovoService;
             InitializeComponent();
             RetrieveAndUpdateFleetData();

@@ -253,6 +253,7 @@ namespace FlightSimulatorControlCenter
         {
             if (nuovoService != null)
             {
+                this.Close();
                 _externalService = nuovoService;
                 idFlottaAttiva = -1;
                 InitializeComponent();

@@ -2,6 +2,7 @@
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
 
 namespace FlightSimulatorControlCenter
@@ -143,25 +144,32 @@ namespace FlightSimulatorControlCenter
         {
             
             
-            sceltaForm.SceltaSelected. += ()
+            sceltaForm.SceltaSelected += (int scelta) =>
             {
-                // Ricevo la notifica che un aereo è stato creato
-                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
-                fleetManagerForm?.RequestUpdateData();
-            };
+                
+                switch (scelta)
+                {
+                    case 1:
+                        _externalService = new ExternalServicesRemoteService();
+                        
+                        break;
+                    case 2:
+                        _externalService = new ExternalServicesFakeDBService(_conversionService);
+                        
+                        break;
+                        
+                    case 3:
+                        _externalService = new ExternalServicesMockedService();
+                        
+                        break;
+                        
+                }
+                idFlottaSelezionata = -1;
 
-            airplaneManagerForm.AirPlaneUpdated += (AereoBl aereobl) =>
-            {
-                // Ricevo la notifica che un aereo è stato creato
-                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
-                fleetManagerForm?.RequestUpdateData();
-            };
+                fleetManagerForm?.UpdateExternalService(_externalService);
+                airplaneManagerForm?.UpdateExternalService(_externalService);
 
-            airplaneManagerForm.AirPlaneDeleted += (AereoBl aereobl) =>
-            {
-                // Ricevo la notifica che un aereo è stato creato
-                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
-                fleetManagerForm?.RequestUpdateData();
+
             };
 
         }
