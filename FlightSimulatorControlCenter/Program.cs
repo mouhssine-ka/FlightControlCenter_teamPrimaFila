@@ -18,32 +18,12 @@ namespace FlightSimulatorControlCenter
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-
-            // Inizializzo il modello di db
-            List<AereoBl> aerei = new List<AereoBl>() {
-            AereoBl.AereoBlFactory(1, "AereoCod1", "Rosso", 10),
-            AereoBl.AereoBlFactory(2,"AereoCod2", "Blu", 20),
-            AereoBl.AereoBlFactory(3,"AereoCod3", "Verde", 10)
-            };
-
-            var flotta1 = FlottaBl.FlottaBlFactory(1, "WizzAir", "Attiva", aerei);
-
-            FakeDB.AggiungiFlotta(flotta1);
-
-            List<AereoBl> aerei2 = new List<AereoBl>() {
-            AereoBl.AereoBlFactory(4,"AereoCod4", "Rosso", 40),
-            AereoBl.AereoBlFactory(5,"AereoCod5", "Blu", 50),
-            AereoBl.AereoBlFactory(6,"AereoCod6", "Verde", 60)
-            };
-
-            var flotta2 = FlottaBl.FlottaBlFactory(2, "Rayanair", "Attiva", aerei2);
-
-            FakeDB.AggiungiFlotta(flotta2);
-
+            
             // Sono singleton
             IValidationUserInputService validationService = new ValidationUserInputService();
-            IExternalServicesService externalService = new ExternalServicesMockedService("http://localhost:5093/");
             IConversionModelService conversionService = new ConversionModelService();
+            // remote server addr"http://localhost:5093/"
+            IExternalServicesService externalService = new ExternalServicesFakeDBService(conversionService);
 
             Application.Run(new MainWindow(validationService, externalService, conversionService));
         }
