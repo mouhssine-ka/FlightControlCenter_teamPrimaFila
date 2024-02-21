@@ -1,5 +1,6 @@
 ﻿using FlightSimulatorControlCenter.Helper;
 using FlightSimulatorControlCenter.Model.Aereo;
+using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Model.Flotta;
 using FlightSimulatorControlCenter.Service.Int;
 
@@ -17,6 +18,7 @@ namespace FlightSimulatorControlCenter
         FleetManager fleetManagerForm;
         DbSelection sceltaManagerForm;
 
+
         long idFlottaSelezionata = -1;
 
         public MainWindow(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
@@ -30,6 +32,7 @@ namespace FlightSimulatorControlCenter
             UpdateLabelOfSelectedFleet("Flotta non selezionata");
         }
 
+
         private void airplaneManager_Click(object sender, EventArgs e)
         {
             if (!FormUtils.FormIsOpen("AirplaneManager"))
@@ -41,12 +44,6 @@ namespace FlightSimulatorControlCenter
                 airplaneManagerForm.Show();
             }
         }
-
-        private void HandleSceltaManagerEvent(DbSelection sceltaForm)
-        {
-            
-        }
-
         private void HandleAirplaneManagerEvent(AirplaneManager airplaneManagerForm)
         {
             airplaneManagerForm.AirPlaneCreated += (AereoBl aereobl) =>
@@ -130,5 +127,44 @@ namespace FlightSimulatorControlCenter
         {
 
         }
+
+        private void sceltaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormUtils.FormIsOpen("DbSelection"))
+            {
+                sceltaManagerForm = new DbSelection();
+                sceltaManagerForm.MdiParent = this;
+                HandleSceltaManagerEvent(sceltaManagerForm);
+
+                sceltaManagerForm.Show();
+            }
+        }
+        private void HandleSceltaManagerEvent(DbSelection sceltaForm)
+        {
+            
+            
+            sceltaForm.SceltaSelected. += ()
+            {
+                // Ricevo la notifica che un aereo è stato creato
+                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
+                fleetManagerForm?.RequestUpdateData();
+            };
+
+            airplaneManagerForm.AirPlaneUpdated += (AereoBl aereobl) =>
+            {
+                // Ricevo la notifica che un aereo è stato creato
+                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
+                fleetManagerForm?.RequestUpdateData();
+            };
+
+            airplaneManagerForm.AirPlaneDeleted += (AereoBl aereobl) =>
+            {
+                // Ricevo la notifica che un aereo è stato creato
+                // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)
+                fleetManagerForm?.RequestUpdateData();
+            };
+
+        }
+
     }
 }

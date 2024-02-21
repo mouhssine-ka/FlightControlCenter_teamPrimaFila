@@ -33,13 +33,15 @@
             fleetManagerToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripMenuItem();
             scelta1ToolStripMenuItem = new ToolStripMenuItem();
+            optionToolStripMenuItem = new ToolStripMenuItem();
+            sceltaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fleetToolStripMenuItem, toolStripMenuItem1 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fleetToolStripMenuItem, toolStripMenuItem1, optionToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
@@ -58,7 +60,7 @@
             // fleetManagerToolStripMenuItem
             // 
             fleetManagerToolStripMenuItem.Name = "fleetManagerToolStripMenuItem";
-            fleetManagerToolStripMenuItem.Size = new Size(224, 26);
+            fleetManagerToolStripMenuItem.Size = new Size(187, 26);
             fleetManagerToolStripMenuItem.Text = "Fleet Manager";
             fleetManagerToolStripMenuItem.Click += fleetManagerToolStripMenuItem_Click;
             // 
@@ -75,6 +77,20 @@
             scelta1ToolStripMenuItem.Size = new Size(151, 26);
             scelta1ToolStripMenuItem.Text = "Manager";
             scelta1ToolStripMenuItem.Click += airplaneManager_Click;
+            // 
+            // optionToolStripMenuItem
+            // 
+            optionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sceltaToolStripMenuItem });
+            optionToolStripMenuItem.Name = "optionToolStripMenuItem";
+            optionToolStripMenuItem.Size = new Size(69, 24);
+            optionToolStripMenuItem.Text = "Option";
+            // 
+            // sceltaToolStripMenuItem
+            // 
+            sceltaToolStripMenuItem.Name = "sceltaToolStripMenuItem";
+            sceltaToolStripMenuItem.Size = new Size(224, 26);
+            sceltaToolStripMenuItem.Text = "Scelta";
+            sceltaToolStripMenuItem.Click += sceltaToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
@@ -98,5 +114,7 @@
         private ToolStripMenuItem scelta1ToolStripMenuItem;
         private ToolStripMenuItem fleetToolStripMenuItem;
         private ToolStripMenuItem fleetManagerToolStripMenuItem;
+        private ToolStripMenuItem optionToolStripMenuItem;
+        private ToolStripMenuItem sceltaToolStripMenuItem;
     }
 }

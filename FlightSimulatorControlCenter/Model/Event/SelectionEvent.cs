@@ -8,5 +8,5 @@ using FlightSimulatorControlCenter.Service.Int;
 
 namespace FlightSimulatorControlCenter.Model.Event
 {
-    public delegate void SceltaSelectedEvent(IExternalServicesService Service);
+    public delegate void SceltaSelectedEvent(int Service);
 }
