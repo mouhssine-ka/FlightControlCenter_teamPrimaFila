@@ -51,5 +51,11 @@ namespace FlightSimulatorControlCenter.Service
             var aereoModificatoApi = (GetClientIstance().AereoPUTAsync(req)).Result;
             return aereoModificatoApi;
         }
+
+        public AereoApi AereoDeleteAsync(long idAereo)
+        {
+            var aereoCancellatoApi = (GetClientIstance().AereoDELETEAsync(idAereo)).Result;
+            return aereoCancellatoApi;
+        }
     }
 }

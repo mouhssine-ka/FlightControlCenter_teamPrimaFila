@@ -106,6 +106,7 @@
             cancellaAereo.TabIndex = 12;
             cancellaAereo.Text = "Cancella Aereo";
             cancellaAereo.UseVisualStyleBackColor = true;
+            cancellaAereo.Click += cancellaAereo_Click;
             // 
             // AirplaneManager
             // 

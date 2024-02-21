@@ -56,5 +56,11 @@ namespace FlightSimulatorControlCenter.Service
             var aereo1 = new AereoApi() { IdAereo = 1, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 };
             return aereo1;
         }
+
+        public AereoApi AereoDeleteAsync(long idAereo)
+        {
+            var aereo1 = new AereoApi() { IdAereo = 1, CodiceAereo = "AereoCod1", Colore = "Rosso", NumeroDiPosti = 10 };
+            return aereo1;
+        }
     }
 }

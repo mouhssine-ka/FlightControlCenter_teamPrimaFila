@@ -27,6 +27,7 @@ namespace FlightSimulatorControlCenter
 
         private CreazioneAereo creazioneAereoForm;
         private ModificaAereo modificaAereoForm;
+        private CancellaAereo cancellaAereoForm;       
 
         public AirplaneManager(long idFLottaAttiva, IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -87,9 +88,6 @@ namespace FlightSimulatorControlCenter
                 int row = tabellaAerei.CurrentRow.Index;
                 var flottaTableSelezionata = flottaAttiva.Aerei[row];
 
-                // Recupero la flotta bl selezionata
-                //var flottaBlSelezionata = _elencoFlotte.Single(x => x.IdFlotta == flottaTableSelezionata.Id);
-
                 modificaAereoForm = new ModificaAereo(idFlottaAttiva, flottaTableSelezionata);
                 modificaAereoForm.AirplaneModifyReq += (long idFlotta, long idAereo, string codice, string colore, long numPosti) =>
                 {
@@ -116,6 +114,37 @@ namespace FlightSimulatorControlCenter
                     RetrieveAndUpdateFleetData();
                 };
                 modificaAereoForm.Show();
+            }
+        }
+
+        private void cancellaAereo_Click(object sender, EventArgs e)
+        {           
+            // Apro la form di creazione
+            if (!FormUtils.FormIsOpen("CancellaAereo"))
+            {
+                // Recupero l'aereo selezionato
+                int row = tabellaAerei.CurrentRow.Index;
+                var flottaTableSelezionata = flottaAttiva.Aerei[row];
+
+                cancellaAereoForm = new CancellaAereo(idFlottaAttiva, flottaTableSelezionata);
+                cancellaAereoForm.AirplaneDeleteReq += (long idFlotta, long idAereo) =>
+                {
+                    // Eseguo la chiamata
+                    var aereoApi = _externalService.AereoDeleteAsync(idAereo);
+
+                    // converto il modello 
+                    var aereoBlCreato = _conversionService.ConvertToBl(aereoApi);
+
+                    // Mando l'evento
+                    this.AirPlaneDeleted(aereoBlCreato);
+
+                    // Chiudo la form
+                    cancellaAereoForm.Close();
+
+                    // Richiedo l'aggiornamento della tabella
+                    RetrieveAndUpdateFleetData();
+                };
+                cancellaAereoForm.Show();
             }
         }
 
