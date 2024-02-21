@@ -74,6 +74,7 @@ namespace FlightSimulatorControlCenter
 
                     // Richiedo l'aggiornamento della tabella
                     RetrieveAndUpdateFleetData();
+                    CheckUIElementToEnableDisable();
                 };
                 creazioneAereoForm.Show();
             }
@@ -143,6 +144,7 @@ namespace FlightSimulatorControlCenter
 
                     // Richiedo l'aggiornamento della tabella
                     RetrieveAndUpdateFleetData();
+                    CheckUIElementToEnableDisable();
                 };
                 cancellaAereoForm.Show();
             }
@@ -168,13 +170,13 @@ namespace FlightSimulatorControlCenter
         // Controllo se e' selezionata una flotta e attivo disattivo i controlli
         private void CheckUIElementToEnableDisable()
         {
-            if (idFlottaAttiva != -1)
+            if (idFlottaAttiva != -1 && flottaAttiva != null)
             {
                 this.creaAereo.Enabled = true;
-                this.aggiornaDati.Enabled = true;
-                this.modificaAereo.Enabled = true;
-                this.cancellaAereo.Enabled = true;
-            }
+                this.aggiornaDati.Enabled = flottaAttiva.Aerei.Any();
+                this.modificaAereo.Enabled = flottaAttiva.Aerei.Any();
+                this.cancellaAereo.Enabled = flottaAttiva.Aerei.Any();
+            }           
             else
             {
                 this.creaAereo.Enabled = false;
