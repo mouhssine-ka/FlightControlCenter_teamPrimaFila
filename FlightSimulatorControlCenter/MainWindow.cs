@@ -15,6 +15,7 @@ namespace FlightSimulatorControlCenter
         // Aggiungo la ref alle due form
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
+        Scelta sceltaManagerForm;
 
         long idFlottaSelezionata = -1;
 
@@ -35,10 +36,15 @@ namespace FlightSimulatorControlCenter
             {
                 airplaneManagerForm = new AirplaneManager(idFlottaSelezionata, _validationService, _externalService, _conversionService);
                 airplaneManagerForm.MdiParent = this;
-                HandleAirplaneManagerEvent(airplaneManagerForm);              
+                HandleAirplaneManagerEvent(airplaneManagerForm);
 
                 airplaneManagerForm.Show();
             }
+        }
+
+        private void HandleSceltaManagerEvent(Scelta sceltaForm)
+        {
+            
         }
 
         private void HandleAirplaneManagerEvent(AirplaneManager airplaneManagerForm)
@@ -64,7 +70,7 @@ namespace FlightSimulatorControlCenter
                 fleetManagerForm?.RequestUpdateData();
             };
         }
-        
+
         private void fleetManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormUtils.FormIsOpen("FleetManager"))
@@ -98,24 +104,31 @@ namespace FlightSimulatorControlCenter
                 idFlottaSelezionata = flotta.IdFlotta;
                 UpdateLabelOfSelectedFleet(flotta.Nome);
 
-                airplaneManagerForm?.UpdateSelectedFleet(flotta);                
+                airplaneManagerForm?.UpdateSelectedFleet(flotta);
             };
         }
 
         // Metodi interni
-        private void UpdateLabelOfSelectedFleet(string labelFlotta) {
+        private void UpdateLabelOfSelectedFleet(string labelFlotta)
+        {
             // Aggiorno la label nella schermata principale
 
             // Rimuovo la label corrente se presente
-            if (LabelFlottaSelezionata != null) {
+            if (LabelFlottaSelezionata != null)
+            {
                 menuStrip1.Items.Remove(LabelFlottaSelezionata);
-            }        
+            }
 
             // Creo la nuova label e la aggiungo
             LabelFlottaSelezionata = new ToolStripLabel(labelFlotta);
             LabelFlottaSelezionata.Alignment = ToolStripItemAlignment.Right;
             LabelFlottaSelezionata.Padding = new Padding(0, 0, 20, 0);
             menuStrip1.Items.Add(LabelFlottaSelezionata);
+        }
+
+        private void fleetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
