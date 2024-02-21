@@ -15,7 +15,7 @@ namespace FlightSimulatorControlCenter
         // Aggiungo la ref alle due form
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
-        Scelta sceltaManagerForm;
+        DbSelection sceltaManagerForm;
 
         long idFlottaSelezionata = -1;
 
@@ -42,7 +42,7 @@ namespace FlightSimulatorControlCenter
             }
         }
 
-        private void HandleSceltaManagerEvent(Scelta sceltaForm)
+        private void HandleSceltaManagerEvent(DbSelection sceltaForm)
         {
             
         }

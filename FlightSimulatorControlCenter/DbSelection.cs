@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
-    public partial class Scelta : Form
+    public partial class DbSelection : Form
     {
-        public event SceltaSelectedEvent ScletaSelected;
-        public Scelta()
+        public event SceltaSelectedEvent SceltaSelected;
+        public DbSelection()
         {
             InitializeComponent();
         }
