@@ -126,5 +126,11 @@ namespace FlightSimulatorControlCenter
             _elencoFlotte = RetrieveFleetData();
             InitalizeAereiDataGridFromDBModel();
         }
+        public void UpdateExternalService(IExternalServicesService nuovoService)
+        {
+            _externalService = nuovoService;
+            InitializeComponent();
+            RetrieveAndUpdateFleetData();
+        }
     }
 }
