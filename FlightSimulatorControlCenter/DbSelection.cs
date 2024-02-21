@@ -33,6 +33,17 @@ namespace FlightSimulatorControlCenter
 
         private void dbEsterno_Click(object sender, EventArgs e)
         {
+            this.SceltaSelected(1);
+        }
+
+        private void FakeDB_Click(object sender, EventArgs e)
+        {
+            this.SceltaSelected(2);
+        }
+
+        private void MockedDB_Click(object sender, EventArgs e)
+        {
+            this.SceltaSelected(3);
         }
     }
 }

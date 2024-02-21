@@ -43,6 +43,7 @@
             MockedDB.TabIndex = 0;
             MockedDB.Text = "MockedDB";
             MockedDB.UseVisualStyleBackColor = true;
+            MockedDB.Click += MockedDB_Click;
             // 
             // FakeDB
             // 
@@ -53,6 +54,7 @@
             FakeDB.TabIndex = 1;
             FakeDB.Text = "FakeDB";
             FakeDB.UseVisualStyleBackColor = true;
+            FakeDB.Click += FakeDB_Click;
             // 
             // dbEsterno
             // 
