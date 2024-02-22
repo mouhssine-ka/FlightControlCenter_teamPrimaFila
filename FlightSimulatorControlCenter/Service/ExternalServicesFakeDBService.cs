@@ -22,7 +22,11 @@ namespace FlightSimulatorControlCenter.Service
 
             var flotta1 = FlottaBl.FlottaBlFactory(1, "WizzAir", "Attiva", aerei);
 
-            FakeDB.AggiungiFlotta(flotta1);
+            if(!FakeDB.Flotte.Contains(flotta1))
+            {
+                FakeDB.AggiungiFlotta(flotta1);
+
+            }
 
             List<AereoBl> aerei2 = new List<AereoBl>() {
             AereoBl.AereoBlFactory(4,"AereoCod4", "Rosso", 40),

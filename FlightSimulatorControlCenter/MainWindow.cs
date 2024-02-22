@@ -154,6 +154,7 @@ namespace FlightSimulatorControlCenter
                         
                         break;
                     case 2:
+                        //if(_externalService != new ExternalServicesFakeDBService(_conversionService))
                         _externalService = new ExternalServicesFakeDBService(_conversionService);
                         
                         break;

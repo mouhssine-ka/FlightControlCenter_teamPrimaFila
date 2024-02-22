@@ -34,16 +34,28 @@ namespace FlightSimulatorControlCenter
         private void dbEsterno_Click(object sender, EventArgs e)
         {
             this.SceltaSelected(1);
+            dbEsterno.Enabled = false;
+            EnableButtons(FakeDB, MockedDB);
         }
 
         private void FakeDB_Click(object sender, EventArgs e)
         {
             this.SceltaSelected(2);
+            FakeDB.Enabled = false;
+            EnableButtons(MockedDB, dbEsterno);
         }
 
         private void MockedDB_Click(object sender, EventArgs e)
         {
             this.SceltaSelected(3);
+            MockedDB.Enabled = false;
+            EnableButtons(FakeDB, dbEsterno);
+        }
+
+        public void EnableButtons(Button b1, Button b2)
+        {
+            b1.Enabled = true;
+            b2.Enabled = true;
         }
     }
 }

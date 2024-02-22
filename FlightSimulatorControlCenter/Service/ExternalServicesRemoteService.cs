@@ -29,7 +29,7 @@ namespace FlightSimulatorControlCenter.Service
         }
 
         public List<FlottaApi> GetElencoFlotteAsync()
-        {           
+        {                 
             var elencoFlotte = (GetClientIstance().GetElencoFlotteAsync()).Result;
             return elencoFlotte.ToList();
         }

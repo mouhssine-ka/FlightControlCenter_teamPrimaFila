@@ -42,7 +42,8 @@ namespace FlightSimulatorControlCenter
             if (!FormUtils.FormIsOpen("AggiungiFlotta"))
             {
                 formCreazioneFlotta = new AggiungiFlotta(_validationService);
-                formCreazioneFlotta.FleetCreateReq += (string nomeFlotta) => {
+                formCreazioneFlotta.FleetCreateReq += (string nomeFlotta) =>
+                {
                     // Creo la request
                     var req = new CreateFlottaRequest();
                     req.Nome = nomeFlotta;
@@ -64,7 +65,7 @@ namespace FlightSimulatorControlCenter
                 };
                 formCreazioneFlotta.Show();
             }
-        }       
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -73,7 +74,7 @@ namespace FlightSimulatorControlCenter
             var flottaTableSelezionata = flotte[row];
 
             // Recupero la flotta bl selezionata
-            var flottaBlSelezionata = _elencoFlotte.Single(x => x.IdFlotta == flottaTableSelezionata.Id);        
+            var flottaBlSelezionata = _elencoFlotte.Single(x => x.IdFlotta == flottaTableSelezionata.Id);
 
             // Mando l'evento
             this.FleetSelected(flottaBlSelezionata);
@@ -122,17 +123,23 @@ namespace FlightSimulatorControlCenter
             tabellaFlotte.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
         }
 
-        private void RetrieveAndUpdateFleetData() {
+        private void RetrieveAndUpdateFleetData()
+        {
+            tabellaFlotte.DataSource = null;
             _elencoFlotte = RetrieveFleetData();
             InitalizeAereiDataGridFromDBModel();
         }
         public void UpdateExternalService(IExternalServicesService nuovoService)
         {
-            
+            this.Close();
             _externalService = nuovoService;
             InitializeComponent();
             RetrieveAndUpdateFleetData();
-            this.Close();
+        }
+
+        private void FleetManager_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
