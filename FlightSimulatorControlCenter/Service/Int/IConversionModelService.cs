@@ -1,6 +1,7 @@
 ﻿using Clients.ImpiantiClient;
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Model.Volo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace FlightSimulatorControlCenter.Service.Int
 
         FlottaBl ConvertToBl(FlottaApi flottaApi);
 
-        AereoBl ConvertToBl(AereoApi aereoApi);       
+        AereoBl ConvertToBl(AereoApi aereoApi);   
+
+        List<VoloBl> ConvertToBl(List<VoloApi> result);
+
+        VoloBl ConvertToBl(VoloApi voloApi);
     }
 }

@@ -42,7 +42,7 @@ namespace FlightSimulatorControlCenter.Service
         public FlottaApi FlottaPOSTAsync(CreateFlottaRequest req)
         {
             List<AereoApi> aerei = new List<AereoApi>();
-            var flotta1 = new FlottaApi() { IdFlotta=DateTime.Now.Ticks, Nome= req.Nome, Aerei= new List<AereoApi>() };
+            var flotta1 = new FlottaApi() { IdFlotta=DateTime.Now.Ticks, Nome= req.NomeFlotta, Aerei= new List<AereoApi>() };
 
             var flottaToAdd = _conversionService.ConvertToBl(flotta1);
 
@@ -102,6 +102,11 @@ namespace FlightSimulatorControlCenter.Service
             var aereo1 = new AereoApi() { IdAereo = aereobl.IdAereo, CodiceAereo = aereobl.Codice, Colore = aereobl.Colore, NumeroDiPosti = aereobl.NumeroDiPosti };
 
             return aereo1;
+        }
+
+        public List<VoloApi> GetElencoVoliAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

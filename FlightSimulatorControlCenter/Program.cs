@@ -23,7 +23,7 @@ namespace FlightSimulatorControlCenter
             IValidationUserInputService validationService = new ValidationUserInputService();
             IConversionModelService conversionService = new ConversionModelService();
             // remote server addr"http://localhost:5093/"
-            IExternalServicesService externalService = new ExternalServicesFakeDBService(conversionService);
+            IExternalServicesService externalService = new ExternalServicesRemoteService();
 
             Application.Run(new MainWindow(validationService, externalService, conversionService));
         }

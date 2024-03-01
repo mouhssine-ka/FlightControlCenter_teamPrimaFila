@@ -46,7 +46,7 @@ namespace FlightSimulatorControlCenter
                 {
                     // Creo la request
                     var req = new CreateFlottaRequest();
-                    req.Nome = nomeFlotta;
+                    req.NomeFlotta = nomeFlotta;
 
                     // Eseguo la chiamata
                     var flottaApi = _externalService.FlottaPOSTAsync(req);

@@ -1,6 +1,7 @@
 ﻿using Clients.ImpiantiClient;
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Model.Volo;
 using FlightSimulatorControlCenter.Service.Int;
 
 namespace FlightSimulatorControlCenter.Service
@@ -27,6 +28,20 @@ namespace FlightSimulatorControlCenter.Service
         public List<FlottaBl> ConvertToBl(List<FlottaApi> flotte)
         {
             return flotte.Select(x => ConvertToBl(x)).ToList();
+        }
+
+        public List<VoloBl> ConvertToBl(List<VoloApi> voli)
+        {
+            return voli.Select(x=>ConvertToBl(x)).ToList();
+        }
+
+        public VoloBl ConvertToBl(VoloApi voloApi)
+        {
+            var aereo = voloApi.Aereo;
+            AereoBl aereoBl = AereoBl.AereoBlFactory(aereo.AereoId, aereo.CodiceAereo, aereo.Colore, aereo.NumeroDiPosti);
+
+            var voloBl = VoloBl.VoloBlFactory(voloApi.IdVolo, aereoBl, voloApi.PostiRimanenti, voloApi.CostoDelPosto, voloApi.CittaPartenza, voloApi.CittaArrivo, voloApi.OrarioPartenza, voloApi.OrarioArrivo);
+            return voloBl;
         }
     }
 }

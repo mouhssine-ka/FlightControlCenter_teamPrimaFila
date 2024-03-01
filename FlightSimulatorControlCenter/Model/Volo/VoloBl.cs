@@ -30,5 +30,10 @@ namespace FlightSimulatorControlCenter.Model.Volo
             this.OrarioPartenza = orarioPartenza;
             this.OrarioArrivo = orarioArrivo;  
         }
+        public static VoloBl VoloBlFactory(long idVolo, AereoBl aereo, long postiRimanenti, decimal costoDelPosto,
+            string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo)
+        {
+            return new VoloBl(idVolo, aereo, postiRimanenti, costoDelPosto, cittaPartenza, cittaArrivo, orarioPartenza, orarioArrivo);
+        }
     }
 }

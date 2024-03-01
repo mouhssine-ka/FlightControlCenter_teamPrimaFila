@@ -1,6 +1,6 @@
 ﻿namespace FlightSimulatorControlCenter
 {
-    partial class CreazioneVolo
+    partial class FlightManager
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tabellaVoli = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)tabellaVoli).BeginInit();
             SuspendLayout();
             // 
-            // CreazioneVolo
+            // tabellaVoli
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            tabellaVoli.AllowUserToAddRows = false;
+            tabellaVoli.AllowUserToDeleteRows = false;
+            tabellaVoli.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tabellaVoli.Location = new Point(7, 201);
+            tabellaVoli.Name = "tabellaVoli";
+            tabellaVoli.ReadOnly = true;
+            tabellaVoli.Size = new Size(786, 237);
+            tabellaVoli.TabIndex = 0;
+            // 
+            // FlightForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(800, 450);
-            Name = "CreazioneVolo";
-            Text = "CreazionVolo";
+            Controls.Add(tabellaVoli);
+            Name = "FlightForm";
+            Text = "FlightForm";
+            ((System.ComponentModel.ISupportInitialize)tabellaVoli).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView tabellaVoli;
     }
 }

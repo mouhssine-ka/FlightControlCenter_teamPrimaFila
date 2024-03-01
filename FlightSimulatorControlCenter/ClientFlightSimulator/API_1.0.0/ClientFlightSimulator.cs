@@ -2317,7 +2317,7 @@ namespace Clients.ImpiantiClient
         public long PostiRimanenti { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("costoDelPosto")]
-        public double CostoDelPosto { get; set; }
+        public decimal CostoDelPosto { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("cittaPartenza")]
         public string CittaPartenza { get; set; }
@@ -2326,10 +2326,10 @@ namespace Clients.ImpiantiClient
         public string CittaArrivo { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("orarioPartenza")]
-        public System.DateTimeOffset OrarioPartenza { get; set; }
+        public System.DateTime OrarioPartenza { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("orarioArrivo")]
-        public System.DateTimeOffset OrarioArrivo { get; set; }
+        public System.DateTime OrarioArrivo { get; set; }
 
     }
 

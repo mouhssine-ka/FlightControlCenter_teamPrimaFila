@@ -19,7 +19,7 @@ namespace FlightSimulatorControlCenter
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
         DbSelection sceltaManagerForm;
-        FlightsManager flightsManagerForm;
+        FlightManager flightsManagerForm;
         TicketsManager ticketsManagerForm;
 
 
@@ -180,39 +180,13 @@ namespace FlightSimulatorControlCenter
 
         private void flightsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormUtils.FormIsOpen("FlightsManager"))
+            if (!FormUtils.FormIsOpen("FlightManager"))
             {
-                flightsManagerForm = new FlightsManager(_validationService, _externalService, _conversionService);
+                flightsManagerForm = new FlightManager(_validationService, _externalService, _conversionService);
                 flightsManagerForm.MdiParent = this;
                 flightsManagerForm.FormPrincipale = this;
-                HandleFlightsManagerEvent(flightsManagerForm);
                 flightsManagerForm.Show();
             }
-        }
-
-        private void HandleFlightsManagerEvent(FlightsManager flightsManager)
-        {
-            flightsManager.FlightCreate += (VoloBl volo) =>
-            {
-                // Ricevo la notifica che una flotta è stata creata
-            };
-
-            flightsManager.FlightUpdated += (VoloBl volo) =>
-            {
-                // Ricevo la notifica che una flotta è stata modificata
-                // Chiedo alla form di gestione Aerei di aggiornare le info della flotta
-                airplaneManagerForm?.RequestUpdateData();
-            };
-
-            flightsManager.FlightDelete += (VoloBl volo) =>
-            {
-                // Ricevo la notifica che una flotta è stata selezionata
-                // Chiedo alla form di gestione Aerei di aggiornare gli aerei
-                idFlottaSelezionata = flotta.IdFlotta;
-                UpdateLabelOfSelectedFleet(flotta.Nome);
-
-                airplaneManagerForm?.UpdateSelectedFleet(flotta);
-            };
         }
 
         private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
