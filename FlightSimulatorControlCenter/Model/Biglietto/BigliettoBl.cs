@@ -1,7 +1,6 @@
 ﻿using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Flotta;
 using FlightSimulatorControlCenter.Model.Volo;
-using MyNamespace;
 using System;
 using System.Collections.Generic;
 using System.Linq;

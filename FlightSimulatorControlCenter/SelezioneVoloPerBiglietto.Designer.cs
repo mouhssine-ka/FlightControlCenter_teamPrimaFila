@@ -1,6 +1,6 @@
 ﻿namespace FlightSimulatorControlCenter
 {
-    partial class SelezioneAereoPerBiglietto
+    partial class SelezioneVoloPerBiglietto
     {
         /// <summary>
         /// Required designer variable.

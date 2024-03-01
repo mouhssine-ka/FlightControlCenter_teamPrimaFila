@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FlightSimulatorControlCenter
 {
-    public partial class SelezioneAereoPerBiglietto : Form
+    public partial class SelezioneVoloPerBiglietto : Form
     {
-        public SelezioneAereoPerBiglietto()
+        public SelezioneVoloPerBiglietto()
         {
             InitializeComponent();
         }
