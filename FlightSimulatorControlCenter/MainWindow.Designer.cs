@@ -35,13 +35,15 @@
             scelta1ToolStripMenuItem = new ToolStripMenuItem();
             optionToolStripMenuItem = new ToolStripMenuItem();
             sceltaToolStripMenuItem = new ToolStripMenuItem();
+            flightsToolStripMenuItem = new ToolStripMenuItem();
+            ticketsToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fleetToolStripMenuItem, toolStripMenuItem1, optionToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fleetToolStripMenuItem, toolStripMenuItem1, optionToolStripMenuItem, flightsToolStripMenuItem, ticketsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
@@ -60,7 +62,7 @@
             // fleetManagerToolStripMenuItem
             // 
             fleetManagerToolStripMenuItem.Name = "fleetManagerToolStripMenuItem";
-            fleetManagerToolStripMenuItem.Size = new Size(187, 26);
+            fleetManagerToolStripMenuItem.Size = new Size(224, 26);
             fleetManagerToolStripMenuItem.Text = "Fleet Manager";
             fleetManagerToolStripMenuItem.Click += fleetManagerToolStripMenuItem_Click;
             // 
@@ -74,7 +76,7 @@
             // scelta1ToolStripMenuItem
             // 
             scelta1ToolStripMenuItem.Name = "scelta1ToolStripMenuItem";
-            scelta1ToolStripMenuItem.Size = new Size(151, 26);
+            scelta1ToolStripMenuItem.Size = new Size(224, 26);
             scelta1ToolStripMenuItem.Text = "Manager";
             scelta1ToolStripMenuItem.Click += airplaneManager_Click;
             // 
@@ -91,6 +93,20 @@
             sceltaToolStripMenuItem.Size = new Size(224, 26);
             sceltaToolStripMenuItem.Text = "Scelta";
             sceltaToolStripMenuItem.Click += sceltaToolStripMenuItem_Click;
+            // 
+            // flightsToolStripMenuItem
+            // 
+            flightsToolStripMenuItem.Name = "flightsToolStripMenuItem";
+            flightsToolStripMenuItem.Size = new Size(66, 24);
+            flightsToolStripMenuItem.Text = "Flights";
+            flightsToolStripMenuItem.Click += flightsToolStripMenuItem_Click;
+            // 
+            // ticketsToolStripMenuItem
+            // 
+            ticketsToolStripMenuItem.Name = "ticketsToolStripMenuItem";
+            ticketsToolStripMenuItem.Size = new Size(68, 24);
+            ticketsToolStripMenuItem.Text = "Tickets";
+            ticketsToolStripMenuItem.Click += ticketsToolStripMenuItem_Click;
             // 
             // MainWindow
             // 
@@ -116,5 +132,7 @@
         private ToolStripMenuItem fleetManagerToolStripMenuItem;
         private ToolStripMenuItem optionToolStripMenuItem;
         private ToolStripMenuItem sceltaToolStripMenuItem;
+        private ToolStripMenuItem flightsToolStripMenuItem;
+        private ToolStripMenuItem ticketsToolStripMenuItem;
     }
 }

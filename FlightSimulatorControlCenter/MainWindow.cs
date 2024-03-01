@@ -2,6 +2,7 @@
 using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Event;
 using FlightSimulatorControlCenter.Model.Flotta;
+using FlightSimulatorControlCenter.Model.Volo;
 using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
 
@@ -18,6 +19,8 @@ namespace FlightSimulatorControlCenter
         AirplaneManager airplaneManagerForm;
         FleetManager fleetManagerForm;
         DbSelection sceltaManagerForm;
+        FlightsManager flightsManagerForm;
+        TicketsManager ticketsManagerForm;
 
 
         long idFlottaSelezionata = -1;
@@ -142,28 +145,28 @@ namespace FlightSimulatorControlCenter
         }
         private void HandleSceltaManagerEvent(DbSelection sceltaForm)
         {
-            
-            
+
+
             sceltaForm.SceltaSelected += (int scelta) =>
             {
-                
+
                 switch (scelta)
                 {
                     case 1:
                         _externalService = new ExternalServicesRemoteService();
-                        
+
                         break;
                     case 2:
                         //if(_externalService != new ExternalServicesFakeDBService(_conversionService))
                         _externalService = new ExternalServicesFakeDBService(_conversionService);
-                        
+
                         break;
-                        
+
                     case 3:
                         _externalService = new ExternalServicesMockedService();
-                        
+
                         break;
-                        
+
                 }
                 idFlottaSelezionata = -1;
 
@@ -175,5 +178,47 @@ namespace FlightSimulatorControlCenter
 
         }
 
+        private void flightsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormUtils.FormIsOpen("FlightsManager"))
+            {
+                flightsManagerForm = new FlightsManager(_validationService, _externalService, _conversionService);
+                flightsManagerForm.MdiParent = this;
+                flightsManagerForm.FormPrincipale = this;
+                HandleFlightsManagerEvent(flightsManagerForm);
+                flightsManagerForm.Show();
+            }
+        }
+
+        private void HandleFlightsManagerEvent(FlightsManager flightsManager)
+        {
+            flightsManager.FlightCreate += (VoloBl volo) =>
+            {
+                // Ricevo la notifica che una flotta è stata creata
+            };
+
+            flightsManager.FlightUpdated += (VoloBl volo) =>
+            {
+                // Ricevo la notifica che una flotta è stata modificata
+                // Chiedo alla form di gestione Aerei di aggiornare le info della flotta
+                airplaneManagerForm?.RequestUpdateData();
+            };
+
+            flightsManager.FlightDelete += (VoloBl volo) =>
+            {
+                // Ricevo la notifica che una flotta è stata selezionata
+                // Chiedo alla form di gestione Aerei di aggiornare gli aerei
+                idFlottaSelezionata = flotta.IdFlotta;
+                UpdateLabelOfSelectedFleet(flotta.Nome);
+
+                airplaneManagerForm?.UpdateSelectedFleet(flotta);
+            };
+        }
+
+        private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+    
 }
