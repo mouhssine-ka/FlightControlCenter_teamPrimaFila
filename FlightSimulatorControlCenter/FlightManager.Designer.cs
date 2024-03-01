@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             tabellaVoli = new DataGridView();
+            btnCreaVolo = new Button();
             ((System.ComponentModel.ISupportInitialize)tabellaVoli).BeginInit();
             SuspendLayout();
             // 
@@ -43,14 +44,25 @@
             tabellaVoli.Size = new Size(786, 237);
             tabellaVoli.TabIndex = 0;
             // 
-            // FlightForm
+            // btnCreaVolo
+            // 
+            btnCreaVolo.Location = new Point(620, 73);
+            btnCreaVolo.Name = "btnCreaVolo";
+            btnCreaVolo.Size = new Size(131, 54);
+            btnCreaVolo.TabIndex = 1;
+            btnCreaVolo.Text = "Crea volo";
+            btnCreaVolo.UseVisualStyleBackColor = true;
+            btnCreaVolo.Click += btnCreaVolo_Click;
+            // 
+            // FlightManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCreaVolo);
             Controls.Add(tabellaVoli);
-            Name = "FlightForm";
+            Name = "FlightManager";
             Text = "FlightForm";
             ((System.ComponentModel.ISupportInitialize)tabellaVoli).EndInit();
             ResumeLayout(false);
@@ -59,5 +71,6 @@
         #endregion
 
         private DataGridView tabellaVoli;
+        private Button btnCreaVolo;
     }
 }

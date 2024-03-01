@@ -1,4 +1,5 @@
-﻿using FlightSimulatorControlCenter.Model.Volo;
+﻿using FlightSimulatorControlCenter.Helper;
+using FlightSimulatorControlCenter.Model.Volo;
 using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
 using System;
@@ -17,7 +18,7 @@ namespace FlightSimulatorControlCenter
     {
 
         public List<VoloBl> _elencoVoli = new List<VoloBl>();
-        public BindingList<VoloTableModel> voli = new BindingList<VoloTableModel> ();
+        public BindingList<VoloTableModel> voli = new BindingList<VoloTableModel>();
 
 
         private IValidationUserInputService _validationService;
@@ -25,6 +26,7 @@ namespace FlightSimulatorControlCenter
         private IConversionModelService _conversionService;
 
         public MainWindow FormPrincipale { get; set; }
+        private CreazioneVolo FormCreazioneVolo;    
 
         public FlightManager(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -48,7 +50,7 @@ namespace FlightSimulatorControlCenter
         {
             voli = new BindingList<VoloTableModel>();
 
-            foreach(var v in _elencoVoli)
+            foreach (var v in _elencoVoli)
             {
                 var temp = VoloTableModel.VoloTableModelFactory(v.IdVolo, v.Aereo.IdAereo, v.PostiRimanenti, v.CostoDelPosto, v.CittaPartenza, v.CittaArrivo, v.OrarioPartenza, v.OrarioArrivo);
                 voli.Add(temp);
@@ -69,6 +71,16 @@ namespace FlightSimulatorControlCenter
             var voliBl = _conversionService.ConvertToBl(result);
 
             return voliBl;
+        }
+        
+        private void btnCreaVolo_Click(object sender, EventArgs e)
+        {
+            if (!FormUtils.FormIsOpen("CreazioneVolo"))
+            {
+                FormCreazioneVolo = new CreazioneVolo();
+
+                FormCreazioneVolo.Show();
+             }
         }
     }
 }
