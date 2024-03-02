@@ -72,5 +72,10 @@ namespace FlightSimulatorControlCenter.Service
         {
             throw new NotImplementedException();
         }
+
+        public Task VoloDELETEAsync(long idVolo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

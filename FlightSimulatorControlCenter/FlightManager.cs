@@ -21,7 +21,7 @@ namespace FlightSimulatorControlCenter
     {
         public List<VoloBl> _elencoVoli = new List<VoloBl>();
         public BindingList<VoloTableModel> voli = new BindingList<VoloTableModel>();
-
+        public VoloBl VoloSelezionato { get; set; }
 
         private IValidationUserInputService _validationService;
         private IExternalServicesService _externalService;
@@ -29,6 +29,7 @@ namespace FlightSimulatorControlCenter
 
         public MainWindow FormPrincipale { get; set; }
         private CreazioneVolo FormCreazioneVolo;
+        private CancellaVolo FormCancellaVolo;
 
         public FlightManager(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -102,6 +103,39 @@ namespace FlightSimulatorControlCenter
                 };
 
                 FormCreazioneVolo.Show();
+            }
+        }
+
+        private void btnEliminaVolo_Click(object sender, EventArgs e)
+        {
+            if (VoloSelezionato == null)
+            {
+                MessageBox.Show("E' neccessario selezionare un Volo");
+                return;
+            }
+            if (!FormUtils.FormIsOpen("CancellaVolo"))
+            {
+                FormCancellaVolo = new CancellaVolo(VoloSelezionato, _externalService);
+                FormCancellaVolo.FlightDeleted += () =>
+                {
+                    RetrieveAndUpdateVoli();
+                    VoloSelezionato = null;
+                    FormCancellaVolo.Close();
+                };
+                FormCancellaVolo.Show();
+            }
+        }
+
+        private void btnSeleziona_Click(object sender, EventArgs e)
+        {
+            var row = tabellaVoli.CurrentRow.Index;
+            var voloDaSelezionare = voli[row];
+
+            VoloBl volo = _elencoVoli.Single(x => x.IdVolo == voloDaSelezionare.IdVolo);
+
+            if( volo != null )
+            {
+                VoloSelezionato = volo;
             }
         }
     }
