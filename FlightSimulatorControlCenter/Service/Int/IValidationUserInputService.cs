@@ -10,5 +10,6 @@ namespace FlightSimulatorControlCenter.Service.Int
     public interface IValidationUserInputService
     {
         ValidationForUserAirplaneCreationResponse ValidateUserInputForAirplaneCreation(string codice, string colore, string numeroDiPosti);
+        ValidationForUserVoloCreationResponse ValidateUserInputForVoloCreation(long aereoId, decimal costoPosto, string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo);
     }
 }

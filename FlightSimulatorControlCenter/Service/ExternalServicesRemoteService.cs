@@ -63,5 +63,11 @@ namespace FlightSimulatorControlCenter.Service
             var voliApi = GetClientIstance().GetTuttiVoliAsync().Result;
             return voliApi.ToList();
         }
+
+        public VoloApi VoloPOSTAsync(CreateVoloRequest req)
+        {
+            var volo = (GetClientIstance().VoloPOSTAsync(req)).Result;
+            return volo;
+        }
     }
 }

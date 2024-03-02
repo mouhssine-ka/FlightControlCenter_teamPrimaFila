@@ -1,4 +1,5 @@
-﻿using FlightSimulatorControlCenter.Helper;
+﻿using Clients.ImpiantiClient;
+using FlightSimulatorControlCenter.Helper;
 using FlightSimulatorControlCenter.Model.Volo;
 using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
@@ -11,12 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static FlightSimulatorControlCenter.Model.Event.FlightEvent;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace FlightSimulatorControlCenter
 {
     public partial class FlightManager : Form
     {
-
         public List<VoloBl> _elencoVoli = new List<VoloBl>();
         public BindingList<VoloTableModel> voli = new BindingList<VoloTableModel>();
 
@@ -26,7 +28,7 @@ namespace FlightSimulatorControlCenter
         private IConversionModelService _conversionService;
 
         public MainWindow FormPrincipale { get; set; }
-        private CreazioneVolo FormCreazioneVolo;    
+        private CreazioneVolo FormCreazioneVolo;
 
         public FlightManager(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -72,15 +74,35 @@ namespace FlightSimulatorControlCenter
 
             return voliBl;
         }
-        
+
         private void btnCreaVolo_Click(object sender, EventArgs e)
         {
             if (!FormUtils.FormIsOpen("CreazioneVolo"))
             {
-                FormCreazioneVolo = new CreazioneVolo();
+                FormCreazioneVolo = new CreazioneVolo(_validationService, _externalService, _conversionService);
+                FormCreazioneVolo.VoloCreateReq += (long idAereo, decimal costoPosto, string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo) =>
+                {
+                    // Creo la request
+                    var req = new CreateVoloRequest();
+                    req.AereoId = idAereo;
+                    req.CostoDelPosto = costoPosto;
+                    req.CittaPartenza = cittaPartenza;
+                    req.CittaArrivo = cittaArrivo;
+                    req.OrarioPartenza = orarioPartenza;
+                    req.OrarioArrivo = orarioArrivo;
+
+                    // Eseguo la chiamata
+                    var voloApi = _externalService.VoloPOSTAsync(req);
+
+                    // Chiudo la form
+                    FormCreazioneVolo.Close();
+
+                    // Richiedo l'aggiornamento della tabella
+                    RetrieveAndUpdateVoli();
+                };
 
                 FormCreazioneVolo.Show();
-             }
+            }
         }
     }
 }

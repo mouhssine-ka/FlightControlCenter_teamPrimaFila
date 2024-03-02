@@ -33,7 +33,7 @@
             txtBoxCostoVolo = new TextBox();
             txtBoxCittaPartenza = new TextBox();
             btnScegliAereo = new Button();
-            label1 = new Label();
+            lblAereoSelezionato = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -42,7 +42,9 @@
             btnCreaVolo = new Button();
             dtpOrarioArrivo = new DateTimePicker();
             dtpOrarioPartenza = new DateTimePicker();
-            label7 = new Label();
+            lblIdAereoSelezoinato = new Label();
+            label1 = new Label();
+            btnAnnulla = new Button();
             SuspendLayout();
             // 
             // txtBoxCittaArrivo
@@ -50,7 +52,7 @@
             txtBoxCittaArrivo.Location = new Point(315, 169);
             txtBoxCittaArrivo.Name = "txtBoxCittaArrivo";
             txtBoxCittaArrivo.Size = new Size(190, 23);
-            txtBoxCittaArrivo.TabIndex = 0;
+            txtBoxCittaArrivo.TabIndex = 2;
             // 
             // lblCreaVolo
             // 
@@ -67,32 +69,33 @@
             txtBoxCostoVolo.Location = new Point(315, 96);
             txtBoxCostoVolo.Name = "txtBoxCostoVolo";
             txtBoxCostoVolo.Size = new Size(190, 23);
-            txtBoxCostoVolo.TabIndex = 5;
+            txtBoxCostoVolo.TabIndex = 0;
             // 
             // txtBoxCittaPartenza
             // 
             txtBoxCittaPartenza.Location = new Point(315, 129);
             txtBoxCittaPartenza.Name = "txtBoxCittaPartenza";
             txtBoxCittaPartenza.Size = new Size(190, 23);
-            txtBoxCittaPartenza.TabIndex = 6;
+            txtBoxCittaPartenza.TabIndex = 1;
             // 
             // btnScegliAereo
             // 
             btnScegliAereo.Location = new Point(42, 152);
             btnScegliAereo.Name = "btnScegliAereo";
             btnScegliAereo.Size = new Size(105, 35);
-            btnScegliAereo.TabIndex = 7;
+            btnScegliAereo.TabIndex = 6;
             btnScegliAereo.Text = "Scegli Aereo";
             btnScegliAereo.UseVisualStyleBackColor = true;
+            btnScegliAereo.Click += btnScegliAereo_Click;
             // 
-            // label1
+            // lblAereoSelezionato
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(34, 207);
-            label1.Name = "label1";
-            label1.Size = new Size(107, 15);
-            label1.TabIndex = 8;
-            label1.Text = "Aereo Selezionato: ";
+            lblAereoSelezionato.AutoSize = true;
+            lblAereoSelezionato.Location = new Point(34, 207);
+            lblAereoSelezionato.Name = "lblAereoSelezionato";
+            lblAereoSelezionato.Size = new Size(107, 15);
+            lblAereoSelezionato.TabIndex = 8;
+            lblAereoSelezionato.Text = "Aereo Selezionato: ";
             // 
             // label2
             // 
@@ -145,39 +148,71 @@
             btnCreaVolo.Location = new Point(546, 153);
             btnCreaVolo.Name = "btnCreaVolo";
             btnCreaVolo.Size = new Size(105, 35);
-            btnCreaVolo.TabIndex = 15;
-            btnCreaVolo.Text = "Crea";
+            btnCreaVolo.TabIndex = 7;
+            btnCreaVolo.Text = "Salva";
             btnCreaVolo.UseVisualStyleBackColor = true;
+            btnCreaVolo.Click += btnCreaVolo_Click;
             // 
             // dtpOrarioArrivo
             // 
+            dtpOrarioArrivo.CustomFormat = "dd/MM/yyyy HH:mm";
+            dtpOrarioArrivo.Format = DateTimePickerFormat.Custom;
             dtpOrarioArrivo.Location = new Point(315, 247);
             dtpOrarioArrivo.Name = "dtpOrarioArrivo";
             dtpOrarioArrivo.Size = new Size(191, 23);
-            dtpOrarioArrivo.TabIndex = 16;
+            dtpOrarioArrivo.TabIndex = 5;
             // 
             // dtpOrarioPartenza
             // 
+            dtpOrarioPartenza.CustomFormat = "dd/MM/yyyy HH:mm";
+            dtpOrarioPartenza.Format = DateTimePickerFormat.Custom;
+            dtpOrarioPartenza.ImeMode = ImeMode.NoControl;
             dtpOrarioPartenza.Location = new Point(314, 207);
             dtpOrarioPartenza.Name = "dtpOrarioPartenza";
-            dtpOrarioPartenza.Size = new Size(191, 23);
-            dtpOrarioPartenza.TabIndex = 17;
+            dtpOrarioPartenza.Size = new Size(192, 23);
+            dtpOrarioPartenza.TabIndex = 4;
             // 
-            // label7
+            // lblIdAereoSelezoinato
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(141, 207);
-            label7.Name = "label7";
-            label7.Size = new Size(18, 15);
-            label7.TabIndex = 18;
-            label7.Text = "ID";
+            lblIdAereoSelezoinato.AutoSize = true;
+            lblIdAereoSelezoinato.Location = new Point(141, 207);
+            lblIdAereoSelezoinato.Name = "lblIdAereoSelezoinato";
+            lblIdAereoSelezoinato.Size = new Size(18, 15);
+            lblIdAereoSelezoinato.TabIndex = 18;
+            lblIdAereoSelezoinato.Text = "ID";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Cursor = Cursors.Hand;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(340, 300);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 17);
+            label1.TabIndex = 19;
+            // 
+            // btnAnnulla
+            // 
+            btnAnnulla.BackColor = Color.Red;
+            btnAnnulla.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAnnulla.ForeColor = Color.White;
+            btnAnnulla.Location = new Point(305, 288);
+            btnAnnulla.Name = "btnAnnulla";
+            btnAnnulla.Size = new Size(82, 29);
+            btnAnnulla.TabIndex = 20;
+            btnAnnulla.Text = "Annulla";
+            btnAnnulla.UseVisualStyleBackColor = false;
+            btnAnnulla.Click += btnAnnulla_Click;
             // 
             // CreazioneVolo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
-            Controls.Add(label7);
+            Controls.Add(btnAnnulla);
+            Controls.Add(label1);
+            Controls.Add(lblIdAereoSelezoinato);
             Controls.Add(dtpOrarioPartenza);
             Controls.Add(dtpOrarioArrivo);
             Controls.Add(btnCreaVolo);
@@ -186,7 +221,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblAereoSelezionato);
             Controls.Add(btnScegliAereo);
             Controls.Add(txtBoxCittaPartenza);
             Controls.Add(txtBoxCostoVolo);
@@ -206,7 +241,7 @@
         private TextBox txtBoxCostoVolo;
         private TextBox txtBoxCittaPartenza;
         private Button btnScegliAereo;
-        private Label label1;
+        private Label lblAereoSelezionato;
         private Label label2;
         private Label label3;
         private Label label4;
@@ -215,6 +250,8 @@
         private Button btnCreaVolo;
         private DateTimePicker dtpOrarioArrivo;
         private DateTimePicker dtpOrarioPartenza;
-        private Label label7;
+        private Label lblIdAereoSelezoinato;
+        private Label label1;
+        private Button btnAnnulla;
     }
 }

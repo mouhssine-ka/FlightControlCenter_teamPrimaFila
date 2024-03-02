@@ -28,66 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListaAereiPerVoli_table = new DataGridView();
-            Annulla_btn = new Button();
-            SelezioneAereo_btn = new Button();
-            ((System.ComponentModel.ISupportInitialize)ListaAereiPerVoli_table).BeginInit();
+            tabellaAerei = new DataGridView();
+            btnAnnulla = new Button();
+            btnSeleziona = new Button();
+            ((System.ComponentModel.ISupportInitialize)tabellaAerei).BeginInit();
             SuspendLayout();
             // 
-            // ListaAereiPerVoli_table
+            // tabellaAerei
             // 
-            ListaAereiPerVoli_table.AllowUserToAddRows = false;
-            ListaAereiPerVoli_table.AllowUserToDeleteRows = false;
-            ListaAereiPerVoli_table.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ListaAereiPerVoli_table.Location = new Point(12, 134);
-            ListaAereiPerVoli_table.Margin = new Padding(3, 4, 3, 4);
-            ListaAereiPerVoli_table.MultiSelect = false;
-            ListaAereiPerVoli_table.Name = "ListaAereiPerVoli_table";
-            ListaAereiPerVoli_table.ReadOnly = true;
-            ListaAereiPerVoli_table.RowHeadersWidth = 51;
-            ListaAereiPerVoli_table.Size = new Size(776, 303);
-            ListaAereiPerVoli_table.TabIndex = 2;
+            tabellaAerei.AllowUserToAddRows = false;
+            tabellaAerei.AllowUserToDeleteRows = false;
+            tabellaAerei.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tabellaAerei.Location = new Point(10, 100);
+            tabellaAerei.MultiSelect = false;
+            tabellaAerei.Name = "tabellaAerei";
+            tabellaAerei.ReadOnly = true;
+            tabellaAerei.RowHeadersWidth = 51;
+            tabellaAerei.Size = new Size(679, 227);
+            tabellaAerei.TabIndex = 2;
             // 
-            // Annulla_btn
+            // btnAnnulla
             // 
-            Annulla_btn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Annulla_btn.Location = new Point(44, 37);
-            Annulla_btn.Margin = new Padding(3, 4, 3, 4);
-            Annulla_btn.Name = "Annulla_btn";
-            Annulla_btn.Size = new Size(153, 56);
-            Annulla_btn.TabIndex = 5;
-            Annulla_btn.Text = "Annulla";
-            Annulla_btn.UseVisualStyleBackColor = true;
+            btnAnnulla.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAnnulla.Location = new Point(38, 28);
+            btnAnnulla.Name = "btnAnnulla";
+            btnAnnulla.Size = new Size(134, 42);
+            btnAnnulla.TabIndex = 5;
+            btnAnnulla.Text = "Annulla";
+            btnAnnulla.UseVisualStyleBackColor = true;
+            btnAnnulla.Click += btnAnnulla_Click;
             // 
-            // SelezioneAereo_btn
+            // btnSeleziona
             // 
-            SelezioneAereo_btn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            SelezioneAereo_btn.Location = new Point(581, 37);
-            SelezioneAereo_btn.Margin = new Padding(3, 4, 3, 4);
-            SelezioneAereo_btn.Name = "SelezioneAereo_btn";
-            SelezioneAereo_btn.Size = new Size(153, 56);
-            SelezioneAereo_btn.TabIndex = 6;
-            SelezioneAereo_btn.Text = "Seleziona";
-            SelezioneAereo_btn.UseVisualStyleBackColor = true;
+            btnSeleziona.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSeleziona.Location = new Point(508, 28);
+            btnSeleziona.Name = "btnSeleziona";
+            btnSeleziona.Size = new Size(134, 42);
+            btnSeleziona.TabIndex = 6;
+            btnSeleziona.Text = "Seleziona";
+            btnSeleziona.UseVisualStyleBackColor = true;
+            btnSeleziona.Click += btnSeleziona_Click;
             // 
             // SelezionaAereoPerVolo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(SelezioneAereo_btn);
-            Controls.Add(Annulla_btn);
-            Controls.Add(ListaAereiPerVoli_table);
+            ClientSize = new Size(700, 338);
+            Controls.Add(btnSeleziona);
+            Controls.Add(btnAnnulla);
+            Controls.Add(tabellaAerei);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SelezionaAereoPerVolo";
             Text = "SelezionaAereoPerVolo";
-            ((System.ComponentModel.ISupportInitialize)ListaAereiPerVoli_table).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tabellaAerei).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView ListaAereiPerVoli_table;
-        private Button Annulla_btn;
-        private Button SelezioneAereo_btn;
+        private DataGridView tabellaAerei;
+        private Button btnAnnulla;
+        private Button btnSeleziona;
     }
 }

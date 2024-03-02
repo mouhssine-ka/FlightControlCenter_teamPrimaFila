@@ -42,5 +42,52 @@ namespace FlightSimulatorControlCenter.Service
                 return ValidationForUserAirplaneCreationResponse.ValidationForUserAirplaneCreationResponseValidFactory(formCodice, formColore, formNumeroDiPosti);
             }          
         }
+
+        public ValidationForUserVoloCreationResponse ValidateUserInputForVoloCreation(long aereoId, decimal costoPosto, string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo)
+        {
+            var errorResult = new List<string>();
+
+            if (aereoId == -1)
+            {
+                errorResult.Add("Scegli un Aereo");
+            }
+            if(costoPosto < 0)
+            {
+                errorResult.Add("Il prezzo non può essere minore di zero");
+            }
+            if (string.IsNullOrWhiteSpace(cittaPartenza))
+            {
+                errorResult.Add("Valorizzare il campo Citta Partenza");
+            }
+
+            if (string.IsNullOrWhiteSpace(cittaArrivo))
+            {
+                errorResult.Add("Valorizzare il campo Citta Arrivo");
+            }
+
+            if(orarioPartenza < DateTime.Now)
+            {
+                errorResult.Add("Orario Partenza non valido (non puoi inserire una data precedente ad oggi)");
+            }
+            if (orarioArrivo < DateTime.Now)
+            {
+                errorResult.Add("Orario Arrivo non valido (non puoi inserire una data precedente ad oggi)");
+            }
+            if (orarioArrivo < orarioPartenza)
+            {
+                errorResult.Add("Orario Partenza non valido (data arrivo è precedente alla data di partenza)");
+            }
+
+            if (errorResult.Any())
+            {
+                return ValidationForUserVoloCreationResponse.ValidationForUserVoloCreationResponseNotValidFactory(errorResult);
+            }
+            else
+            {
+                return ValidationForUserVoloCreationResponse.ValidationForUserVoloCreationResponseValidFactory(aereoId, costoPosto, cittaPartenza, cittaArrivo, orarioPartenza, orarioArrivo);
+            }
+
+        }
+
     }
 }

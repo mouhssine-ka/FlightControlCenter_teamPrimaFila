@@ -16,5 +16,6 @@ namespace FlightSimulatorControlCenter.Service.Int
         List<FlottaApi> GetElencoFlotteAsync();
         FlottaApi GetFlottaAsync(long idFlottaAttiva);
         List<VoloApi> GetElencoVoliAsync();
+        VoloApi VoloPOSTAsync(CreateVoloRequest req);
     }
 }
