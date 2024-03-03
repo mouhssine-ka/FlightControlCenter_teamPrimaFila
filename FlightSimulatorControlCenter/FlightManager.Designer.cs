@@ -32,6 +32,7 @@
             btnCreaVolo = new Button();
             btnEliminaVolo = new Button();
             btnSeleziona = new Button();
+            btnModificaVolo = new Button();
             ((System.ComponentModel.ISupportInitialize)tabellaVoli).BeginInit();
             SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // 
             // btnSeleziona
             // 
-            btnSeleziona.Location = new Point(525, 12);
+            btnSeleziona.Location = new Point(388, 12);
             btnSeleziona.Name = "btnSeleziona";
             btnSeleziona.Size = new Size(131, 54);
             btnSeleziona.TabIndex = 3;
@@ -76,12 +77,23 @@
             btnSeleziona.UseVisualStyleBackColor = true;
             btnSeleziona.Click += btnSeleziona_Click;
             // 
+            // btnModificaVolo
+            // 
+            btnModificaVolo.Location = new Point(525, 12);
+            btnModificaVolo.Name = "btnModificaVolo";
+            btnModificaVolo.Size = new Size(131, 54);
+            btnModificaVolo.TabIndex = 4;
+            btnModificaVolo.Text = "Modifica";
+            btnModificaVolo.UseVisualStyleBackColor = true;
+            btnModificaVolo.Click += btnModificaVolo_Click;
+            // 
             // FlightManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnModificaVolo);
             Controls.Add(btnSeleziona);
             Controls.Add(btnEliminaVolo);
             Controls.Add(btnCreaVolo);
@@ -98,5 +110,6 @@
         private Button btnCreaVolo;
         private Button btnEliminaVolo;
         private Button btnSeleziona;
+        private Button btnModificaVolo;
     }
 }

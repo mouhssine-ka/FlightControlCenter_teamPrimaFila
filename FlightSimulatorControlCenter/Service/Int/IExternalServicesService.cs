@@ -18,5 +18,6 @@ namespace FlightSimulatorControlCenter.Service.Int
         List<VoloApi> GetElencoVoliAsync();
         VoloApi VoloPOSTAsync(CreateVoloRequest req);
         Task VoloDELETEAsync(long idVolo);
+        VoloApi VoloUPDATEAsync(UpdateVoloRequest req);
     }
 }

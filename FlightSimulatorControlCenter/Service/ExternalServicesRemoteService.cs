@@ -75,5 +75,11 @@ namespace FlightSimulatorControlCenter.Service
             var voloCancellatoResponse = GetClientIstance().VoloDELETEAsync(idVolo);
             return voloCancellatoResponse; 
         }
+
+        public VoloApi VoloUPDATEAsync(UpdateVoloRequest req)
+        {
+            var voloApi = GetClientIstance().VoloPUTAsync(req).Result;
+            return voloApi;
+        }
     }
 }

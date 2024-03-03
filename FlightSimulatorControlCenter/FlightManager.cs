@@ -1,5 +1,6 @@
 ﻿using Clients.ImpiantiClient;
 using FlightSimulatorControlCenter.Helper;
+using FlightSimulatorControlCenter.Model.Aereo;
 using FlightSimulatorControlCenter.Model.Volo;
 using FlightSimulatorControlCenter.Service;
 using FlightSimulatorControlCenter.Service.Int;
@@ -30,6 +31,7 @@ namespace FlightSimulatorControlCenter
         public MainWindow FormPrincipale { get; set; }
         private CreazioneVolo FormCreazioneVolo;
         private CancellaVolo FormCancellaVolo;
+        private ModificaVolo FormModificaVolo;
 
         public FlightManager(IValidationUserInputService validationService, IExternalServicesService externalService, IConversionModelService conversionService)
         {
@@ -118,8 +120,8 @@ namespace FlightSimulatorControlCenter
                 FormCancellaVolo = new CancellaVolo(VoloSelezionato, _externalService);
                 FormCancellaVolo.FlightDeleted += () =>
                 {
-                    RetrieveAndUpdateVoli();
                     VoloSelezionato = null;
+                    RetrieveAndUpdateVoli();
                     FormCancellaVolo.Close();
                 };
                 FormCancellaVolo.Show();
@@ -133,9 +135,47 @@ namespace FlightSimulatorControlCenter
 
             VoloBl volo = _elencoVoli.Single(x => x.IdVolo == voloDaSelezionare.IdVolo);
 
-            if( volo != null )
+            if (volo != null)
             {
                 VoloSelezionato = volo;
+            }
+        }
+
+        private void btnModificaVolo_Click(object sender, EventArgs e)
+        {
+            if(VoloSelezionato == null)
+            {
+                MessageBox.Show("E' neccessario selezionare un volo");
+                return;
+            }
+
+            if (!FormUtils.FormIsOpen("ModificaVolo"))
+            {
+                FormModificaVolo = new ModificaVolo(VoloSelezionato, _externalService, _validationService);
+
+                FormModificaVolo.FlightModifyReq += (idAereo, numPosti, costoPosto, cittaPartenza, cittaArrivo, orarioPartenza, orarioArrivo) =>
+                {
+                    var req = new UpdateVoloRequest();
+                    req.AereoId = idAereo;
+                    req.VoloId = VoloSelezionato.IdVolo;
+                    req.Posti = numPosti;
+                    req.CostoDelPosto = costoPosto;
+                    req.CittaPartenza = cittaPartenza;
+                    req.CittaArrivo = cittaArrivo;
+                    req.OrarioPartenza = orarioPartenza;
+                    req.OrarioArrivo = orarioArrivo;
+
+                    var voloApi = _externalService.VoloUPDATEAsync(req);
+
+                    var voloBlModificato = _conversionService.ConvertToBl(voloApi);
+
+                    FormModificaVolo.Close();
+                    VoloSelezionato = null;
+                    RetrieveAndUpdateVoli();
+
+                };
+
+                FormModificaVolo.Show();
             }
         }
     }

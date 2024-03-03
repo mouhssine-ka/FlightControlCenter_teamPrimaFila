@@ -77,5 +77,10 @@ namespace FlightSimulatorControlCenter.Service
         {
             throw new NotImplementedException();
         }
+
+        public VoloApi VoloUPDATEAsync(UpdateVoloRequest req)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
