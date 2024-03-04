@@ -64,7 +64,7 @@ namespace FlightSimulatorControlCenter
                 fleetManagerForm?.RequestUpdateData();
             };
 
-            airplaneManagerForm.AirPlaneDeleted += (AereoBl aereobl) =>
+            airplaneManagerForm.AirPlaneDeleted += () =>
             {
                 // Ricevo la notifica che un aereo è stato creato
                 // Chiedo alla form di gestione flotta di aggiornare la lista (così da incrementare il numero di aerei)

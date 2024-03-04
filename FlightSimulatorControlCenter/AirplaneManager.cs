@@ -133,11 +133,8 @@ namespace FlightSimulatorControlCenter
                     // Eseguo la chiamata
                     var aereoApi = _externalService.AereoDeleteAsync(idAereo);
 
-                    // converto il modello 
-                    var aereoBlCreato = _conversionService.ConvertToBl(aereoApi);
-
                     // Mando l'evento
-                    this.AirPlaneDeleted(aereoBlCreato);
+                    this.AirPlaneDeleted();
 
                     // Chiudo la form
                     cancellaAereoForm.Close();

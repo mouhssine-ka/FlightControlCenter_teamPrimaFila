@@ -43,16 +43,17 @@ namespace FlightSimulatorControlCenter
             RetrieveAndUpdateVoli();
 
         }
-        private void RetrieveAndUpdateVoli()
+        private async Task RetrieveAndUpdateVoli()
         {
             tabellaVoli.DataSource = null;
-            _elencoVoli = RetrieveVoliData();
+            _elencoVoli = await RetrieveVoliData();
             InitalizeVoliDataGridFromDBModel();
 
         }
 
         private void InitalizeVoliDataGridFromDBModel()
         {
+            voli.Clear();
             voli = new BindingList<VoloTableModel>();
 
             foreach (var v in _elencoVoli)
@@ -69,7 +70,7 @@ namespace FlightSimulatorControlCenter
             tabellaVoli.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
         }
 
-        private List<VoloBl> RetrieveVoliData()
+        private async Task<List<VoloBl>> RetrieveVoliData()
         {
             var result = _externalService.GetElencoVoliAsync();
 
@@ -118,11 +119,13 @@ namespace FlightSimulatorControlCenter
             if (!FormUtils.FormIsOpen("CancellaVolo"))
             {
                 FormCancellaVolo = new CancellaVolo(VoloSelezionato, _externalService);
-                FormCancellaVolo.FlightDeleted += () =>
+                FormCancellaVolo.FlightDeleteReq += async (long idVolo) =>
                 {
+                    var voloDeleted = _externalService.VoloDELETEAsync(idVolo);
                     VoloSelezionato = null;
-                    RetrieveAndUpdateVoli();
                     FormCancellaVolo.Close();
+                    await RetrieveAndUpdateVoli();
+
                 };
                 FormCancellaVolo.Show();
             }

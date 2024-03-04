@@ -17,6 +17,8 @@ namespace FlightSimulatorControlCenter
     public partial class CancellaVolo : Form
     {
         public event FlightDeletedEvent FlightDeleted;
+        public event FlightExecuteDeleteEvent FlightDeleteReq;
+
         private IExternalServicesService _externalService;
 
         private VoloBl Volo { get; set; }
@@ -48,8 +50,7 @@ namespace FlightSimulatorControlCenter
 
         private void btnElimina_Click(object sender, EventArgs e)
         {
-           _externalService.VoloDELETEAsync(Volo.IdVolo);
-            FlightDeleted();
+            FlightDeleteReq(Volo.IdVolo);
         }
     }
 }

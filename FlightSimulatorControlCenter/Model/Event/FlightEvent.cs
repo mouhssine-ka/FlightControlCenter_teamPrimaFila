@@ -15,5 +15,6 @@ namespace FlightSimulatorControlCenter.Model.Event
 
         public delegate void FlightExecuteCreateEvent(long aereoId, decimal costoTotale, string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo);
         public delegate void FlightExecuteModifyEvent(long aereoId, long numPosti, decimal costoTotale, string cittaPartenza, string cittaArrivo, DateTime orarioPartenza, DateTime orarioArrivo);
+        public delegate void FlightExecuteDeleteEvent(long voloId);
     }
 }
